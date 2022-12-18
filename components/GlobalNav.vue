@@ -2,9 +2,16 @@
   <nav id="global-nav">
     <ul class="nav-list">
       <li class="list-item" v-for="(item, i) in links" :key="i">
-        <nuxt-link class="nuxt-link" :to="item.url" role="link">
-          {{ item.name }}
-        </nuxt-link>
+        <template v-if="item.type === 'anchor'">
+          <a class="nuxt-link" :href="item.url" target="_blank">
+            {{ item.name }}</a
+          >
+        </template>
+        <template v-else>
+          <nuxt-link class="nuxt-link" :to="item.url" role="link">
+            {{ item.name }}
+          </nuxt-link>
+        </template>
       </li>
     </ul>
   </nav>
@@ -21,11 +28,13 @@ export default {
         // },
         {
           name: 'BLOG',
-          url: '/blog',
+          url: 'https://brunch.co.kr/@seoro-malgm',
+          type: 'anchor',
         },
         {
           name: 'PRODUCTS',
-          url: '/products',
+          url: 'https://marpple.shop/kr/seoro_malgm',
+          type: 'anchor',
         },
         {
           name: 'CONTACT',

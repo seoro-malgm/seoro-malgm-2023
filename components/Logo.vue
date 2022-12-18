@@ -16,22 +16,22 @@
         :style="options.text[gatherd ? 'gatherd' : 'scatterd']"
       />
     </router-link>
-    <router-link to="/">
-      <img
-        class="logo right-hand"
-        :src="require('~/assets/right-hand.svg')"
-        alt="로고, 오른손"
-        :style="options.rightHand[gatherd ? 'gatherd' : 'scatterd']"
-      />
-    </router-link>
-    <router-link to="/">
-      <img
-        class="logo left-hand"
-        :src="require('~/assets/left-hand.svg')"
-        alt="로고, 왼손"
-        :style="options.leftHand[gatherd ? 'gatherd' : 'scatterd']"
-      />
-    </router-link>
+    <!-- <router-link to="/"> -->
+    <img
+      class="logo right-hand"
+      :src="require('~/assets/right-hand.svg')"
+      alt="로고, 오른손"
+      :style="options.rightHand[gatherd ? 'gatherd' : 'scatterd']"
+    />
+    <!-- </router-link> -->
+    <!-- <router-link to="/"> -->
+    <img
+      class="logo left-hand"
+      :src="require('~/assets/left-hand.svg')"
+      alt="로고, 왼손"
+      :style="options.leftHand[gatherd ? 'gatherd' : 'scatterd']"
+    />
+    <!-- </router-link> -->
   </div>
 </template>
 
