@@ -12,9 +12,13 @@ import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css'
 
 import '../assets/styles/index.scss'
 
+import _5ab6bd2a from '../layouts/Default.vue'
+import _758012f7 from '../layouts/Empty.vue'
+import _75825fb2 from '../layouts/Error.vue'
+import _758c751e from '../layouts/Fixed.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_Default": sanitizeComponent(_5ab6bd2a),"_Empty": sanitizeComponent(_758012f7),"_Error": sanitizeComponent(_75825fb2),"_Fixed": sanitizeComponent(_758c751e),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

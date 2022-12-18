@@ -1,5 +1,12 @@
 [
   {
+    "name": "Blog",
+    "path": "/Blog",
+    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/index.vue",
+    "chunkName": "pages/Blog/index",
+    "_name": "_2cd86a7a"
+  },
+  {
     "name": "Contact",
     "path": "/Contact",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Contact.vue",
@@ -12,13 +19,6 @@
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Products/index.vue",
     "chunkName": "pages/Products/index",
     "_name": "_7540db3c"
-  },
-  {
-    "name": "Work",
-    "path": "/Work",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Work/index.vue",
-    "chunkName": "pages/Work/index",
-    "_name": "_2b8a79ae"
   },
   {
     "name": "Admin-Dashboard",
@@ -35,8 +35,15 @@
     "_name": "_c6c82ff8"
   },
   {
+    "name": "Blog-id",
+    "path": "/Blog/:id",
+    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/_id.vue",
+    "chunkName": "pages/Blog/_id",
+    "_name": "_5692c362"
+  },
+  {
     "name": "Work-id",
-    "path": "/Work/:id",
+    "path": "/Work/:id?",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Work/_id.vue",
     "chunkName": "pages/Work/_id",
     "_name": "_367d085e"

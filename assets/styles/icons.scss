@@ -1,0 +1,12 @@
+i.icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  .line {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 2px;
+    // background-color: $secondary;
+  }
+}

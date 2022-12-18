@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'seoro-malgm',
     htmlAttrs: {
-      lang: 'ko',
+      lang: 'ko-KR',
     },
     meta: [
       { charset: 'utf-8' },
@@ -43,8 +43,9 @@ export default {
     dir: 'dist',
   },
   styleResources: {
-    scss: ['@/assets/styles/variables.scss'],
+    scss: ['~/assets/styles/variables.scss'],
   },
+  dev: process.env.NODE_ENV === 'development',
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -63,7 +64,4 @@ export default {
   loading: {
     color: '#2f318e',
   },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
 }
