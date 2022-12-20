@@ -1,14 +1,14 @@
 <template>
   <div class="pt-4 pb-5 work-wrapper">
     <template v-if="currentWork">
-      <!-- <header class="mb-5">
+      <header class="mb-2">
         <b-btn
-          variant="text mb-3 p-0 text-secondary d-flex d-md-none"
-          to="/work"
+          variant="text mb-0 p-0 d-flex d-md-none text-primary d-inline-flex align-items-center"
+          to="/"
         >
-          <icons-arrow-back /> GO BACK
+          <icon-arr-back /> <span class="ml-2 fw-700">GO BACK</span>
         </b-btn>
-      </header> -->
+      </header>
       <b-row tag="section" class="pb-5 pb-md-0">
         <b-col cols="12" md="8" order="2" order-md="1">
           <div class="work-desc" v-html="currentWork.desc" />
@@ -21,12 +21,13 @@
         </b-col>
       </b-row>
       <b-btn
-        variant="primary btn-go-top"
+        variant="secondary btn-go-top d-inline-flex align-items-center shadow"
+        :class="{ active }"
         @click="goTop"
-        :style="active ? { bottom: '2rem' } : { bottom: '-5rem' }"
+        aria-label="맨 위로 이동 버튼"
+        aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
       >
-        <!-- <icons-arrow-top /> -->
-        GO TOP
+        <icon-arr-top />
       </b-btn>
     </template>
     <template v-else>
@@ -160,5 +161,22 @@ export default {
   position: fixed;
   transition: 0.3s;
   right: 2rem;
+}
+
+@media (max-width: 1280px) {
+  .btn-go-top {
+    top: -4rem;
+  }
+  .btn-go-top.active {
+    top: 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .btn-go-top {
+    bottom: -4rem;
+  }
+  .btn-go-top.active {
+    bottom: 2rem;
+  }
 }
 </style>

@@ -8,3 +8,6 @@ You can directly use them in pages and other components without the need to impo
 
 - `<GlobalNav>` | `<global-nav>` (components/GlobalNav.vue)
 - `<Logo>` | `<logo>` (components/Logo.vue)
+- `<IconArrBack>` | `<icon-arr-back>` (components/icon/ArrBack.vue)
+- `<IconArrDown>` | `<icon-arr-down>` (components/icon/ArrDown.vue)
+- `<IconArrTop>` | `<icon-arr-top>` (components/icon/ArrTop.vue)

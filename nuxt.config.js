@@ -12,12 +12,12 @@ export default {
       {
         hid: 'title',
         name: 'title',
-        content: '디자이너 서로맑음 이상준',
+        content: '서로맑음 스튜디오',
       },
       {
         hid: 'description',
         name: 'description',
-        content: '디자이너 서로맑음 이상준',
+        content: '서로맑음 스튜디오',
       },
       {
         name: 'keyword',
@@ -34,7 +34,7 @@ export default {
         hid: 'og:title',
         name: 'og:title',
         property: 'og:title',
-        content: '디자이너 서로맑음 이상준',
+        content: '서로맑음 스튜디오',
       },
       {
         hid: 'og:description',

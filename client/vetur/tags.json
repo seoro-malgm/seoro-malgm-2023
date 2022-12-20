@@ -4,5 +4,14 @@
   },
   "Logo": {
     "description": "Auto imported from components/Logo.vue"
+  },
+  "IconArrBack": {
+    "description": "Auto imported from components/icon/ArrBack.vue"
+  },
+  "IconArrDown": {
+    "description": "Auto imported from components/icon/ArrDown.vue"
+  },
+  "IconArrTop": {
+    "description": "Auto imported from components/icon/ArrTop.vue"
   }
 }

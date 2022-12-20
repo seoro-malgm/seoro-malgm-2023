@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- works -->
     <b-row tag="section" class="work-list">
       <b-col
         v-for="work in items"
@@ -37,7 +38,7 @@ export default {
   },
   head() {
     return {
-      title: `WORKS | 서로맑음`,
+      title: `서로맑음 스튜디오`,
     }
   },
   data() {

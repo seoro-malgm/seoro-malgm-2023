@@ -5,6 +5,11 @@
       <Logo :gatherd="onGathered" />
       <global-nav />
     </header>
+    <!-- scroll down -->
+    <div class="scroll-down" :class="{ active: onGathered }">
+      <span class="text-primary">Scroll Down</span>
+      <icon-arr-down />
+    </div>
     <!-- 내용 -->
     <main id="main" class="container-fluid" :class="{ active: !onGathered }">
       <Nuxt />
@@ -60,6 +65,41 @@ export default {
       transform: translateY(0);
       opacity: 1;
     }
+  }
+}
+@keyframes updown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(16px);
+  }
+}
+.scroll-down {
+  position: fixed;
+  left: 50%;
+  bottom: 6rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  .icon {
+    animation-name: updown;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 4px;
+  }
+  &.active {
+    display: flex;
+    opacity: 1;
   }
 }
 </style>
