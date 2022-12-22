@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'seoro-malgm',
+    title: '서로맑음 스튜디오',
     htmlAttrs: {
       lang: 'ko-KR',
     },

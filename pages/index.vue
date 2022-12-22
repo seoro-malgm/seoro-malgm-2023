@@ -36,11 +36,6 @@ export default {
       categories,
     }
   },
-  head() {
-    return {
-      title: `서로맑음 스튜디오`,
-    }
-  },
   data() {
     return {
       works: null,
