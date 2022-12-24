@@ -7,7 +7,7 @@ export default {
   layout: 'Fixed',
   head() {
     return {
-      title: `PRODUCTS | 서로맑음`,
+      title: `PRODUCTS | 서로맑음 스튜디오`,
     }
   },
 }

@@ -10,7 +10,7 @@
         lg="4"
         class="work-item"
       >
-        <figure class="work" @click="$router.push(`/work/${work.no}`)">
+        <figure class="work" @click="$router.push(`/work/${work.id}`)">
           <img :src="work.thumbnailURL" :alt="`${work.title}, 썸네일 이미지`" />
           <figcaption class="work-desc">
             <h6 class="mb-0">{{ work.title }}</h6>

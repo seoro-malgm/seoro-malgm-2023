@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '서로맑음 스튜디오',
+    title: '서로맑음 스튜디오 | Seoro-Malgm Studio',
     htmlAttrs: {
       lang: 'ko-KR',
     },
@@ -12,35 +12,53 @@ export default {
       {
         hid: 'title',
         name: 'title',
-        content: '서로맑음 스튜디오',
+        property: 'title',
+        content: '서로맑음 스튜디오 | Seoro-Malgm Studio',
       },
       {
         hid: 'description',
         name: 'description',
-        content: '서로맑음 스튜디오',
+        property: 'description',
+        content: 'UI/UX, Branding, Calligraphy, Graphic Design',
       },
       {
         name: 'keyword',
         content:
-          'UI/UX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드',
+          'UI/UX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui/ux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너',
       },
       {
-        hid: 'og:image',
+        hid: 'og_image',
         name: 'og:image',
         property: 'og:image',
-        content: '/ogImage.png',
+        content: '/og-image-221224-2.png',
       },
       {
-        hid: 'og:title',
+        hid: 'og_title',
         name: 'og:title',
         property: 'og:title',
-        content: '서로맑음 스튜디오',
+        content: '서로맑음 스튜디오 | Seoro-Malgm Studio',
       },
       {
-        hid: 'og:description',
+        hid: 'og_description',
         name: 'og:description',
         property: 'og:description',
         content: 'UI/UX, Branding, Calligraphy, Graphic',
+      },
+      {
+        name: 'og:url',
+        property: 'og:url',
+        content: 'https://seoro-malgm.me',
+      },
+      {
+        name: 'og:type',
+        property: 'og:type',
+        content:
+          'portfolio, design, ui/ux, branding, calligrapy, 디자인, 디자이너, 시각디자인, 포스터디자인, 브랜딩, 브랜드디자인, 브랜딩디자인, 그래픽디자이너, graphic, graphic design, 포트폴리오',
+      },
+      {
+        name: 'og:site_name',
+        property: 'og:site_name',
+        content: '서로맑음 스튜디오 | Seoro-Malgm Studio',
       },
       {
         name: 'msapplication-TileImage',
@@ -131,6 +149,8 @@ export default {
       },
     ],
   },
+
+  mode: 'universal',
 
   css: [
     {

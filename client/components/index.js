@@ -1,4 +1,5 @@
 export const GlobalNav = () => import('../../components/GlobalNav.vue' /* webpackChunkName: "components/global-nav" */).then(c => wrapFunctional(c.default || c))
+export const Loading = () => import('../../components/Loading.vue' /* webpackChunkName: "components/loading" */).then(c => wrapFunctional(c.default || c))
 export const Logo = () => import('../../components/Logo.vue' /* webpackChunkName: "components/logo" */).then(c => wrapFunctional(c.default || c))
 export const IconArrBack = () => import('../../components/icon/ArrBack.vue' /* webpackChunkName: "components/icon-arr-back" */).then(c => wrapFunctional(c.default || c))
 export const IconArrDown = () => import('../../components/icon/ArrDown.vue' /* webpackChunkName: "components/icon-arr-down" */).then(c => wrapFunctional(c.default || c))

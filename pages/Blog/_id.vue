@@ -7,7 +7,7 @@ export default {
   layout: 'Fixed',
   head() {
     return {
-      title: `${'work name'} | 서로맑음`,
+      title: `${'work name'} | 서로맑음 스튜디오`,
     }
   },
 }

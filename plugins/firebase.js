@@ -26,7 +26,12 @@ const allWorks = async () => {
     const col = collection(db, 'works')
     const snapshot = await getDocs(col)
     if (snapshot) {
-      const works = snapshot.docs.map((doc) => doc.data())
+      const works = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        }
+      })
       return works.sort((a, b) => {
         return b.createdAt - a.createdAt
       })
@@ -36,4 +41,16 @@ const allWorks = async () => {
   }
 }
 
-export { db, allWorks }
+const getWork = async (id) => {
+  try {
+    const col = doc(db, 'works', id)
+    const snapshot = await getDoc(col)
+    if (snapshot) {
+      return snapshot.data()
+    }
+  } catch (error) {
+    console.error('error::', error)
+  }
+}
+
+export { db, allWorks, getWork }

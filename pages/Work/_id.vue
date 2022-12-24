@@ -31,76 +31,40 @@
       </b-btn>
     </template>
     <template v-else>
-      <loading />
+      <Loading />
     </template>
   </div>
 </template>
 
 <script>
-import { allWorks } from '~/plugins/firebase.js'
+import { getWork } from '~/plugins/firebase.js'
 
 export default {
   layout: 'Fixed',
   async asyncData({ params }) {
-    const works = await allWorks()
-
-    const currentWork = works.find((r) => {
-      return r.no === +params.id
-    })
+    const works = await getWork(params.id)
 
     return {
       id: params.id,
       works,
-      currentWork,
+      currentWork: works,
     }
   },
-  head() {
-    return {
-      title: `${this.currentWork.title} | 서로맑음`,
-      meta: [
-        // {
-        //   hid: "title",
-        //   name: "title",
-        //   property: "title",
-        //   content: `${this.currentWork.title} | 서로맑음`
-        // },
-        // {
-        //   hid: "description",
-        //   property: "description",
-        //   content: this.currentWork.txt
-        // },
-        // {
-        //   hid: "og:title",
-        //   property: "og:title",
-        //   name: "og:title",
-        //   content: `${this.currentWork.title} | 서로맑음`
-        // },
-        // {
-        //   hid: "og:image",
-        //   name: "og:title",
-        //   property: "og:image",
-        //   content: this.currentWork.thumbnailURL
-        // }
-        // {
-        //   hid: "og:description",
-        //   property: "og:description",
-        //   content: this.currentWork.txt
-        // }
-      ],
-    }
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
+
   data() {
     return {
       active: false,
     }
   },
-
+  beforeMount() {
+    // 스크롤 핸들러
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    if (this.path !== 'index') return
+    // 스크롤 핸들러 해제
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   methods: {
     goTop() {
       window.scrollTo(0, 0)
@@ -108,6 +72,39 @@ export default {
     handleScroll() {
       this.active = !!(window.scrollY > 180)
     },
+  },
+
+  head() {
+    return {
+      title: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+      meta: [
+        {
+          hid: 'title',
+          name: 'title',
+          content: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+        },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.currentWork?.txt,
+        },
+        {
+          hid: 'og_title',
+          name: 'og:title',
+          content: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+        },
+        {
+          hid: 'og_image',
+          name: 'og:image',
+          content: this.currentWork?.thumbnailURL,
+        },
+        {
+          hid: 'og_description',
+          name: 'og:description',
+          content: this.currentWork?.txt,
+        },
+      ],
+    }
   },
 }
 </script>

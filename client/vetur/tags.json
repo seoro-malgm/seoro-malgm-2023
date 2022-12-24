@@ -2,6 +2,9 @@
   "GlobalNav": {
     "description": "Auto imported from components/GlobalNav.vue"
   },
+  "Loading": {
+    "description": "Auto imported from components/Loading.vue"
+  },
   "Logo": {
     "description": "Auto imported from components/Logo.vue"
   },

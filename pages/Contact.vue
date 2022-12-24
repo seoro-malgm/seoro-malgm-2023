@@ -61,7 +61,7 @@ export default {
   layout: 'Fixed',
   head() {
     return {
-      title: `CONTACT | 서로맑음`,
+      title: `CONTACT | 서로맑음 스튜디오`,
     }
   },
   methods: {
