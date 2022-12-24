@@ -49,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 #global-nav {
   position: fixed;
-  right: 0;
+  right: -1px;
   z-index: 2000;
   @media (max-width: 1280px) {
     bottom: 0;
@@ -77,12 +77,12 @@ export default {
       .nuxt-link {
         background-color: #ededed;
         @media (max-width: 1280px) {
-          font-size: 14px;
-          padding: 2px 4px;
+          font-size: 18px;
+          padding: 4px 10px;
         }
         @media (min-width: 1280px) {
-          font-size: 16px;
-          padding: 4px 8px;
+          font-size: 30px;
+          padding: 8px 12px;
         }
         &.nuxt-link-exact-active,
         &.nuxt-link-active {

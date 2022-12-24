@@ -10,6 +10,18 @@
       <span class="text-primary">Scroll Down</span>
       <icon-arr-down />
     </div>
+
+    <!-- scroll up btn -->
+    <b-btn
+      variant="secondary btn-go-top d-inline-flex align-items-center shadow"
+      :class="{ active: scrollUpActive }"
+      @click="goTop"
+      aria-label="맨 위로 이동 버튼"
+      aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
+    >
+      <icon-arr-top />
+    </b-btn>
+
     <!-- 내용 -->
     <main id="main" class="container-fluid" :class="{ active: !onGathered }">
       <Nuxt />
@@ -23,6 +35,7 @@ export default {
   data() {
     return {
       onGathered: true,
+      scrollUpActive: false,
     }
   },
   computed: {
@@ -44,11 +57,21 @@ export default {
       const scrollTop = window.scrollY || document.documentElement.scrollTop
       if (scrollTop <= 50) {
         this.onGathered = true
-      } else {
-        if (this.onGathered) {
-          this.onGathered = false
-        }
       }
+
+      if (scrollTop >= 180) {
+        this.scrollUpActive = true
+      }
+
+      if (this.onGathered && scrollTop > 50) {
+        this.onGathered = false
+      }
+      if (this.scrollUpActive && scrollTop < 180) {
+        this.scrollUpActive = false
+      }
+    },
+    goTop() {
+      window.scrollTo(0, 0)
     },
   },
 }
@@ -57,12 +80,13 @@ export default {
 #app {
   padding: 16px 0;
   #main {
-    padding-top: 600px;
-    transform: translateY(48px);
+    padding-top: 100vh;
+    overflow-y: unset;
+    // transform: translateY(48px);
     opacity: 0;
     transition: all 0.5s;
     &.active {
-      transform: translateY(0);
+      transform: translateY(-10vh);
       opacity: 1;
     }
   }
@@ -100,6 +124,31 @@ export default {
   &.active {
     display: flex;
     opacity: 1;
+  }
+}
+
+.btn-go-top {
+  padding: 8px 8px;
+  background-color: #ededed !important;
+  border-color: #ededed !important;
+  border-radius: 50%;
+  display: flex;
+  position: fixed;
+  transition: 0.3s;
+  z-index: 2010;
+  font-size: 16px;
+  right: 1rem;
+  top: -4rem;
+  @media (min-width: 1280px) {
+    top: unset;
+    bottom: -4rem;
+  }
+  &.active {
+    @media (min-width: 1280px) {
+      bottom: 1rem;
+      top: unset;
+    }
+    top: 1rem;
   }
 }
 </style>

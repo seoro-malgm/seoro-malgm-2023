@@ -154,13 +154,16 @@ export default {
 }
 
 .btn-go-top {
-  padding: 12px 16px;
-  color: #ededed;
-  border-radius: 4rem;
+  padding: 8px 8px;
+  border-radius: 50%;
+  background-color: #ededed !important;
+  border-color: #ededed !important;
   display: flex;
   position: fixed;
   transition: 0.3s;
-  right: 2rem;
+  right: 1rem;
+  z-index: 2010;
+  font-size: 16px;
 }
 
 @media (max-width: 1280px) {
@@ -168,7 +171,7 @@ export default {
     top: -4rem;
   }
   .btn-go-top.active {
-    top: 2rem;
+    top: 1rem;
   }
 }
 @media (min-width: 1280px) {

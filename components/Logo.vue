@@ -102,7 +102,7 @@ export default {
   height: auto;
   position: fixed;
   transition: all 0.4s;
-  z-index: 2000;
+  z-index: 2010;
   animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   &.eye {
     width: 74px;
