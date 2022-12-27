@@ -1,9 +1,9 @@
-export const GlobalNav = () => import('../../components/GlobalNav.vue' /* webpackChunkName: "components/global-nav" */).then(c => wrapFunctional(c.default || c))
-export const Loading = () => import('../../components/Loading.vue' /* webpackChunkName: "components/loading" */).then(c => wrapFunctional(c.default || c))
-export const Logo = () => import('../../components/Logo.vue' /* webpackChunkName: "components/logo" */).then(c => wrapFunctional(c.default || c))
-export const IconArrBack = () => import('../../components/icon/ArrBack.vue' /* webpackChunkName: "components/icon-arr-back" */).then(c => wrapFunctional(c.default || c))
-export const IconArrDown = () => import('../../components/icon/ArrDown.vue' /* webpackChunkName: "components/icon-arr-down" */).then(c => wrapFunctional(c.default || c))
-export const IconArrTop = () => import('../../components/icon/ArrTop.vue' /* webpackChunkName: "components/icon-arr-top" */).then(c => wrapFunctional(c.default || c))
+export { default as GlobalNav } from '../../components/GlobalNav.vue'
+export { default as Loading } from '../../components/Loading.vue'
+export { default as Logo } from '../../components/Logo.vue'
+export { default as IconArrBack } from '../../components/icon/ArrBack.vue'
+export { default as IconArrDown } from '../../components/icon/ArrDown.vue'
+export { default as IconArrTop } from '../../components/icon/ArrTop.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

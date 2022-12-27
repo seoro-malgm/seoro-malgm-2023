@@ -17,8 +17,8 @@
               >Email:
               <a
                 role="button"
-                @click="copyText('contact@seoro-malgm.me', '이메일주소가')"
-                >contact@seoro-malgm.me
+                @click="copyText('seoromalgm@gmail.com', '이메일주소가')"
+                >seoromalgm@gmail.com
               </a>
             </span>
           </li>

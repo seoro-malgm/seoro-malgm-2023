@@ -30,7 +30,7 @@ export default {
         hid: 'og_image',
         name: 'og:image',
         property: 'og:image',
-        content: '/og-image-221224-2.png',
+        content: '/og-image-221227-1.png',
       },
       {
         hid: 'og_title',
@@ -47,7 +47,7 @@ export default {
       {
         name: 'og:url',
         property: 'og:url',
-        content: 'https://seoro-malgm.me',
+        content: 'https://seoro-malgm.studio',
       },
       {
         name: 'og:type',
