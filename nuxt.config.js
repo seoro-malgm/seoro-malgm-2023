@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 export default {
   mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
+
   head: {
     title: '서로맑음 스튜디오 | Seoro-Malgm Studio',
     htmlAttrs: {
@@ -226,8 +229,21 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: '/',
   },
-
+  // 로딩바
   loading: {
     color: '#2f318e',
+  },
+  // 환경변수
+  env: {
+    ENV: process.env.ENV,
+    API_KEY: process.env.API_KEY,
+    API_KEY: process.env.API_KEY,
+    AUTH_DOMAIN: process.env.AUTH_DOMAIN,
+    DATABASE_URL: process.env.DATABASE_URL,
+    PROJECT_ID: process.env.PROJECT_ID,
+    STORAGE_BUCKET: process.env.STORAGE_BUCKET,
+    MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
+    APP_ID: process.env.APP_ID,
+    MEASUREMENT_ID: process.env?.MEASUREMENT_ID || '',
   },
 }

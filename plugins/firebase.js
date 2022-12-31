@@ -18,16 +18,15 @@ import {
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage'
-
 const firebaseConfig = {
-  apiKey: 'AIzaSyAyJHtWMjG-0UJsWiVCUrKSRLUeqwAzhxI',
-  authDomain: 'seoro-malgm.firebaseapp.com',
-  databaseURL: 'https://seoro-malgm.firebaseio.com',
-  projectId: 'seoro-malgm',
-  storageBucket: 'seoro-malgm.appspot.com',
-  messagingSenderId: '158099597201',
-  appId: '1:158099597201:web:4a9cd2142b89e1a301dc30',
-  measurementId: 'G-R7FYNEMFH4',
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env?.MEASUREMENT_ID || '',
 }
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "dev": "nuxt --dotenv .env.dev",
+    "build": "nuxt build --dotenv .env.prod",
+    "start": "nuxt start --dotenv .env.prod",
+    "generate": "nuxt generate --dotenv .env.prod",
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:prettier",
     "lintfix": "prettier --write --list-different ."

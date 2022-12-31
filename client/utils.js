@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {}
+      env: {"API_KEY":"AIzaSyBQ2NaQdLRIpT6LA8W5jzXDzs36soO4xv8","AUTH_DOMAIN":"seoro-malgm-dev.firebaseapp.com","DATABASE_URL":"https://seoro-malgm-dev.firebaseio.com","PROJECT_ID":"seoro-malgm-dev","STORAGE_BUCKET":"seoro-malgm-dev.appspot.com","MESSAGING_SENDER_ID":"719872280412","APP_ID":"1:719872280412:web:742515794155c09f80e39","MEASUREMENT_ID":"G-R7FYNEMFH4"}
     }
     // Only set once
 
