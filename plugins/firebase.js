@@ -7,6 +7,9 @@ import {
   getDocs,
   collection,
 } from 'firebase/firestore'
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAyJHtWMjG-0UJsWiVCUrKSRLUeqwAzhxI',
   authDomain: 'seoro-malgm.firebaseapp.com',
@@ -20,8 +23,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
+const auth = getAuth(app)
 
-const allWorks = async () => {
+const getAllWorks = async () => {
   try {
     const col = collection(db, 'works')
     const snapshot = await getDocs(col)
@@ -53,4 +57,38 @@ const getWork = async (id) => {
   }
 }
 
-export { db, allWorks, getWork }
+const login = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((response) => {
+      const user = response?.user
+      if (user) {
+        const { accessToken: token } = user
+        // 리턴
+        return token
+      }
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      console.log('errorCode:', errorCode)
+      const errorMessage = error.message
+      switch (errorCode) {
+        case 'auth/user-not-found':
+          window.toast(`존재하지 않는 계정입니다`, {
+            toaster: 'b-toaster-bottom-center',
+          })
+          // window.alert('')
+          break
+        case 'auth/wrong-password':
+          window.toast(`비밀번호를 다시 확인해주세요.`, {
+            toaster: 'b-toaster-bottom-center',
+          })
+          break
+        default:
+          window.alert(`${errorCode} ::`, errorMessage)
+          break
+      }
+      return
+    })
+}
+
+export { db, getAllWorks, getWork, login }

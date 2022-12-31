@@ -1,4 +1,5 @@
 export default {
+  mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: '서로맑음 스튜디오 | Seoro-Malgm Studio',
@@ -27,19 +28,19 @@ export default {
           'UI/UX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui/ux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너',
       },
       {
-        hid: 'og_image',
+        hid: 'og:image',
         name: 'og:image',
         property: 'og:image',
         content: '/og-image-221227-1.png',
       },
       {
-        hid: 'og_title',
+        hid: 'og:title',
         name: 'og:title',
         property: 'og:title',
         content: '서로맑음 스튜디오 | Seoro-Malgm Studio',
       },
       {
-        hid: 'og_description',
+        hid: 'og:description',
         name: 'og:description',
         property: 'og:description',
         content: 'UI/UX, Branding, Calligraphy, Graphic',
@@ -74,6 +75,35 @@ export default {
         name: 'theme-color',
         property: 'theme-color',
         content: '#2f318e',
+      },
+      {
+        name: 'twitter:card',
+        hid: 'twitter:card',
+        content: '/og-image-221227-1.png',
+      },
+      {
+        property: 'twitter:domain',
+        content: 'seoro-malgm.studio',
+      },
+      {
+        property: 'twitter:url',
+        hid: 'twitter:url',
+        content: 'https://seoro-malgm.studio',
+      },
+      {
+        name: 'twitter:title',
+        hid: 'twitter:title',
+        content: '서로맑음 스튜디오 | Seoro-Malgm Studio',
+      },
+      {
+        name: 'twitter:description',
+        hid: 'twitter:description',
+        content: 'UI/UX, Branding, Calligraphy, Graphic',
+      },
+      {
+        name: 'twitter:image',
+        hid: 'twitter:image',
+        content: '/og-image-221227-1.png',
       },
     ],
     link: [
@@ -149,8 +179,6 @@ export default {
       },
     ],
   },
-
-  mode: 'universal',
 
   css: [
     {

@@ -8,7 +8,12 @@
           >
         </template>
         <template v-else>
-          <nuxt-link class="nuxt-link" :to="item.url" role="link">
+          <nuxt-link
+            class="nuxt-link"
+            :to="item.url"
+            role="link"
+            v-if="item.requireAuth ? auth : true"
+          >
             {{ item.name }}
           </nuxt-link>
         </template>
@@ -40,8 +45,18 @@ export default {
           name: 'CONTACT',
           url: '/contact',
         },
+        {
+          name: 'LOGOUT',
+          url: '/logout',
+          requireAuth: true,
+        },
       ],
     }
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.getUser
+    },
   },
 }
 </script>

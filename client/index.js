@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -9,6 +9,7 @@ import NuxtError from './components/nuxt-error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
+import { createStore } from './store.js'
 
 /* Plugins */
 
@@ -58,16 +59,35 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
+const originalRegisterModule = Vuex.Store.prototype.registerModule
+
+function registerModule (path, rawModule, options = {}) {
+  const preserveState = process.client && (
+    Array.isArray(path)
+      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
+      : path in this.state
+  )
+  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
+}
+
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext, config)
+
+  const store = createStore(ssrContext)
+  // Add this.$router into store actions/mutations
+  store.$router = router
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  store.registerModule = registerModule
 
   // Create Root instance
 
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"서로맑음 스튜디오 | Seoro-Malgm Studio","htmlAttrs":{"lang":"ko-KR"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"format-detection","content":"telephone=no"},{"hid":"title","name":"title","property":"title","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"hid":"description","name":"description","property":"description","content":"UI\u002FUX, Branding, Calligraphy, Graphic Design"},{"name":"keyword","content":"UI\u002FUX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui\u002Fux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너"},{"hid":"og_image","name":"og:image","property":"og:image","content":"\u002Fog-image-221227-1.png"},{"hid":"og_title","name":"og:title","property":"og:title","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"hid":"og_description","name":"og:description","property":"og:description","content":"UI\u002FUX, Branding, Calligraphy, Graphic"},{"name":"og:url","property":"og:url","content":"https:\u002F\u002Fseoro-malgm.studio"},{"name":"og:type","property":"og:type","content":"portfolio, design, ui\u002Fux, branding, calligrapy, 디자인, 디자이너, 시각디자인, 포스터디자인, 브랜딩, 브랜드디자인, 브랜딩디자인, 그래픽디자이너, graphic, graphic design, 포트폴리오"},{"name":"og:site_name","property":"og:site_name","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"name":"msapplication-TileImage","property":"msapplication-TileImage","content":"\u002Fms-icon-144x144.png"},{"name":"msapplication-TileColor","property":"msapplication-TileColor","content":"#2f318e"},{"name":"theme-color","property":"theme-color","content":"#2f318e"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"apple-touch-icon","sizes":"57x57","href":"\u002Fapple-icon-57x57.png"},{"rel":"apple-touch-icon","sizes":"60x60","href":"\u002Fapple-icon-60x60.png"},{"rel":"apple-touch-icon","sizes":"72x72","href":"\u002Fapple-icon-72x72.png"},{"rel":"apple-touch-icon","sizes":"76x76","href":"\u002Fapple-icon-76x76.png"},{"rel":"apple-touch-icon","sizes":"114x114","href":"\u002Fapple-icon-114x114.png"},{"rel":"apple-touch-icon","sizes":"120x120","href":"\u002Fapple-icon-120x120.png"},{"rel":"apple-touch-icon","sizes":"144x144","href":"\u002Fapple-icon-144x144.png"},{"rel":"apple-touch-icon","sizes":"152x152","href":"\u002Fapple-icon-152x152.png"},{"rel":"apple-touch-icon","sizes":"180x180","href":"\u002Fapple-icon-180x180.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"192x192","href":"\u002Fandroid-icon-192x192.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"32x32","href":"\u002Ffavicon-32x32.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"96x96","href":"\u002Ffavicon-96x96.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"16x16","href":"\u002Ffavicon-16x16.png"}],"style":[],"script":[]},
+    head: {"title":"서로맑음 스튜디오 | Seoro-Malgm Studio","htmlAttrs":{"lang":"ko-KR"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"format-detection","content":"telephone=no"},{"hid":"title","name":"title","property":"title","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"hid":"description","name":"description","property":"description","content":"UI\u002FUX, Branding, Calligraphy, Graphic Design"},{"name":"keyword","content":"UI\u002FUX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui\u002Fux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너"},{"hid":"og:image","name":"og:image","property":"og:image","content":"\u002Fog-image-221227-1.png"},{"hid":"og:title","name":"og:title","property":"og:title","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"hid":"og:description","name":"og:description","property":"og:description","content":"UI\u002FUX, Branding, Calligraphy, Graphic"},{"name":"og:url","property":"og:url","content":"https:\u002F\u002Fseoro-malgm.studio"},{"name":"og:type","property":"og:type","content":"portfolio, design, ui\u002Fux, branding, calligrapy, 디자인, 디자이너, 시각디자인, 포스터디자인, 브랜딩, 브랜드디자인, 브랜딩디자인, 그래픽디자이너, graphic, graphic design, 포트폴리오"},{"name":"og:site_name","property":"og:site_name","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"name":"msapplication-TileImage","property":"msapplication-TileImage","content":"\u002Fms-icon-144x144.png"},{"name":"msapplication-TileColor","property":"msapplication-TileColor","content":"#2f318e"},{"name":"theme-color","property":"theme-color","content":"#2f318e"},{"name":"twitter:card","hid":"twitter:card","content":"\u002Fog-image-221227-1.png"},{"property":"twitter:domain","content":"seoro-malgm.studio"},{"property":"twitter:url","hid":"twitter:url","content":"https:\u002F\u002Fseoro-malgm.studio"},{"name":"twitter:title","hid":"twitter:title","content":"서로맑음 스튜디오 | Seoro-Malgm Studio"},{"name":"twitter:description","hid":"twitter:description","content":"UI\u002FUX, Branding, Calligraphy, Graphic"},{"name":"twitter:image","hid":"twitter:image","content":"\u002Fog-image-221227-1.png"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"apple-touch-icon","sizes":"57x57","href":"\u002Fapple-icon-57x57.png"},{"rel":"apple-touch-icon","sizes":"60x60","href":"\u002Fapple-icon-60x60.png"},{"rel":"apple-touch-icon","sizes":"72x72","href":"\u002Fapple-icon-72x72.png"},{"rel":"apple-touch-icon","sizes":"76x76","href":"\u002Fapple-icon-76x76.png"},{"rel":"apple-touch-icon","sizes":"114x114","href":"\u002Fapple-icon-114x114.png"},{"rel":"apple-touch-icon","sizes":"120x120","href":"\u002Fapple-icon-120x120.png"},{"rel":"apple-touch-icon","sizes":"144x144","href":"\u002Fapple-icon-144x144.png"},{"rel":"apple-touch-icon","sizes":"152x152","href":"\u002Fapple-icon-152x152.png"},{"rel":"apple-touch-icon","sizes":"180x180","href":"\u002Fapple-icon-180x180.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"192x192","href":"\u002Fandroid-icon-192x192.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"32x32","href":"\u002Ffavicon-32x32.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"96x96","href":"\u002Ffavicon-96x96.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"16x16","href":"\u002Ffavicon-16x16.png"}],"style":[],"script":[]},
 
+    store,
     router,
     nuxt: {
       defaultTransition,
@@ -112,6 +132,9 @@ async function createApp(ssrContext, config = {}) {
     ...App
   }
 
+  // Make app available into store via this.app
+  store.app = app
+
   const next = ssrContext ? ssrContext.next : location => app.router.push(location)
   // Resolve route
   let route
@@ -124,6 +147,7 @@ async function createApp(ssrContext, config = {}) {
 
   // Set context to app.context
   await setContext(app, {
+    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -150,6 +174,9 @@ async function createApp(ssrContext, config = {}) {
       app.context[key] = value
     }
 
+    // Add into store
+    store[key] = app[key]
+
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
     if (Vue[installKey]) {
@@ -170,6 +197,13 @@ async function createApp(ssrContext, config = {}) {
 
   // Inject runtime config as $config
   inject('config', config)
+
+  if (process.client) {
+    // Replace store state before plugins execution
+    if (window.__NUXT__ && window.__NUXT__.state) {
+      store.replaceState(window.__NUXT__.state)
+    }
+  }
 
   // Add enablePreview(previewData = {}) in context for plugins
   if (process.static && process.client) {
@@ -236,6 +270,7 @@ async function createApp(ssrContext, config = {}) {
   })
 
   return {
+    store,
     app,
     router
   }

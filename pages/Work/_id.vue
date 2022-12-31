@@ -76,32 +76,59 @@ export default {
 
   head() {
     return {
-      title: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+      title: `${this.currentWork.title}`,
       meta: [
         {
           hid: 'title',
           name: 'title',
-          content: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+          content: `${this.currentWork.title}`,
         },
         {
           hid: 'description',
           name: 'description',
-          content: this.currentWork?.txt,
+          content: this.currentWork.exp,
         },
         {
-          hid: 'og_title',
+          hid: 'og:title',
           name: 'og:title',
-          content: `${this.currentWork?.title} | 서로맑음 스튜디오`,
+          content: `${this.currentWork.title}`,
         },
         {
-          hid: 'og_image',
+          hid: 'og:image',
           name: 'og:image',
-          content: this.currentWork?.thumbnailURL,
+          content: this.currentWork.thumbnailURL,
         },
         {
-          hid: 'og_description',
+          hid: 'og:description',
           name: 'og:description',
-          content: this.currentWork?.txt,
+          content: this.currentWork.txt,
+        },
+        {
+          name: 'twitter:card',
+          hid: 'twitter:card',
+          content: '/og-image-221227-1.png',
+        },
+        {
+          property: 'twitter:url',
+          hid: 'twitter:url',
+          content: this.id
+            ? `https://seoro-malgm.studio/work/${this.id}`
+            : 'https://seoro-malgm.studio',
+        },
+        {
+          name: 'twitter:title',
+          hid: 'twitter:title',
+          content: `${this.currentWork.title}`,
+        },
+        {
+          name: 'twitter:description',
+          hid: 'twitter:description',
+          content: this.currentWork.exp,
+        },
+        {
+          name: 'twitter:image',
+          hid: 'twitter:image',
+          content: this.currentWork.thumbnailURL,
         },
       ],
     }

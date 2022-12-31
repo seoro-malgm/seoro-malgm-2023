@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { db, allWorks } from '~/plugins/firebase.js'
+import { db, getAllWorks } from '~/plugins/firebase.js'
 
 export default {
   layout: 'Default',
   async asyncData() {
-    const items = await allWorks()
+    const items = await getAllWorks()
     const categories = [...new Set(items.map((r) => r.exp))]
     // console.log('items:', items)
     return {
