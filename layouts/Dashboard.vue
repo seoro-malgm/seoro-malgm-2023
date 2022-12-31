@@ -59,12 +59,12 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      tabIndex: 'Admin-Works',
+      tabIndex: 'Admin',
       tabs: [
         {
           text: '프로젝트 목록',
-          url: 'works',
-          name: 'Admin-Works',
+          url: '',
+          name: 'Admin',
         },
         {
           text: '새 프로젝트',

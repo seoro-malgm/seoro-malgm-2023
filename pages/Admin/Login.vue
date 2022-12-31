@@ -91,7 +91,7 @@ export default {
           sessionStorage.setItem('seoro-malgm-token', token)
           // store에 저장
           this.$store.dispatch('setState', ['user', token])
-          this.$router.push('/admin/dashboard')
+          this.$router.push('/admin')
         }
       } catch (error) {
         console.error('error:', error)

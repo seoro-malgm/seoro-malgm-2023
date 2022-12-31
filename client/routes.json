@@ -49,13 +49,6 @@
     "_name": "_c6c82ff8"
   },
   {
-    "name": "Admin-Works",
-    "path": "/Admin/Works",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Admin/Works.vue",
-    "chunkName": "pages/Admin/Works",
-    "_name": "_45215f9d"
-  },
-  {
     "name": "Blog-id",
     "path": "/Blog/:id",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/_id.vue",

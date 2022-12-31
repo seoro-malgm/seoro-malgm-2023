@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import { copyText, onResize } from '~/plugins/commons.js'
 export default {
   layout: 'Fixed',
   head() {
@@ -65,19 +66,20 @@ export default {
     }
   },
   methods: {
-    copyText(text, obj) {
-      const board = navigator.clipboard
-      board
-        .writeText(text)
-        .then(() => {
-          this.$bvToast.toast(`${obj} 클립보드에 복사되었습니다.`, {
-            toaster: 'b-toaster-bottom-center',
-          })
-        })
-        .catch((error) => {
-          this.$bvToast.toast(`복사에 실패했습니다`)
-        })
-    },
+    copyText,
+    // copyText(text, obj) {
+    //   const board = navigator.clipboard
+    //   board
+    //     .writeText(text)
+    //     .then(() => {
+    //       this.$bvToast.toast(`${obj} 클립보드에 복사되었습니다.`, {
+    //         toaster: 'b-toaster-bottom-center',
+    //       })
+    //     })
+    //     .catch((error) => {
+    //       this.$bvToast.toast(`복사에 실패했습니다`)
+    //     })
+    // },
   },
 }
 </script>

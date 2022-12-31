@@ -182,12 +182,12 @@ export default {
 
   css: [
     {
-      src: '@/assets/styles/index.scss',
+      src: '~/assets/styles/index.scss',
       lang: 'scss',
     },
   ],
 
-  plugins: [{ src: '@/plugins/common.js' }, { src: '@/plugins/firebase.js' }],
+  plugins: [{ src: '~/plugins/firebase.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

@@ -1,4 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app'
+// auth
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+// firestore
 import {
   getFirestore,
   doc,
@@ -7,8 +10,14 @@ import {
   getDocs,
   collection,
 } from 'firebase/firestore'
-
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+// storage
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAyJHtWMjG-0UJsWiVCUrKSRLUeqwAzhxI',
@@ -91,4 +100,26 @@ const login = (email, password) => {
     })
 }
 
-export { db, getAllWorks, getWork, login }
+const getImageURL = (file, type, path) => {
+  // Upload file and metadata to the object 'images/mountains.jpg'
+  const storage = getStorage()
+  const storageRef = ref(storage, `${path}/${path}${new Date().getTime()}`, {
+    contentType: type,
+  })
+
+  // 'file' comes from the Blob or File API
+  return uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('snapshot.ref:', snapshot.ref)
+    return getDownloadURL(snapshot.ref).then((url) => {
+      return { name: snapshot.ref.name, url }
+    })
+  })
+}
+const deleteImage = (path) => {
+  const storage = getStorage()
+  const desertRef = ref(storage, path)
+  deleteObject(desertRef)
+  return
+}
+
+export { db, getAllWorks, getWork, login, getImageURL, deleteImage }
