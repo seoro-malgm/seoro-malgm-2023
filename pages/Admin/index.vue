@@ -1,13 +1,7 @@
 <template>
-  <div @mouseout="hovered = null">
+  <div>
     <ul class="list-unstyled m-0 p-0">
-      <li
-        v-for="(work, i) in items"
-        :key="i"
-        class="work-item py-2 border-top"
-        @mouseenter="hovered = i"
-        :class="{ active: hovered === i }"
-      >
+      <li v-for="(work, i) in items" :key="i" class="work-item py-2 border-top">
         <b-row align-v="center">
           <b-col cols="1" class="text-center">{{ work.no }}</b-col>
           <b-col cols="2">
@@ -22,8 +16,19 @@
           </b-col>
           <b-col cols="2">
             <div class="d-flex flex-column px-4">
-              <b-btn variant="outline-gray-dark mb-1">수정</b-btn>
-              <b-btn variant="outline-red">삭제</b-btn>
+              <b-btn
+                variant="outline-gray-dark mb-1"
+                @click="
+                  $router.push({
+                    path: '/admin/update',
+                    query: {
+                      id: work.id,
+                    },
+                  })
+                "
+                >수정</b-btn
+              >
+              <b-btn variant="outline-red" @click="remove(work.id)">삭제</b-btn>
             </div>
           </b-col>
         </b-row>
@@ -33,7 +38,7 @@
 </template>
 
 <script>
-import { db, getAllWorks } from '~/plugins/firebase.js'
+import { getAllWorks, removeWork } from '~/plugins/firebase.js'
 export default {
   layout: 'Dashboard',
   async asyncData() {
@@ -45,26 +50,34 @@ export default {
       categories,
     }
   },
-  async mounted() {
-    await this.getWork()
-  },
   data() {
     return {
-      hovered: null,
+      items: [],
+      categories: [],
+      loading: false,
     }
   },
   methods: {
     async getWork(category) {
       this.loading = true
-      if (category) {
-        this.works = this.items.filter((r) => r.exp === category)
-      } else {
-        this.works = this.items
-      }
+      this.items = await getAllWorks()
+      this.categories = [...new Set(this.items.map((r) => r.exp))]
       this.loading = false
     },
-    getWorkLength(category) {
-      return this.items.filter((r) => r.exp === category).length
+    async remove(id) {
+      const bool = await window.confirm('정말로 삭제하시겠습니까?')
+      if (bool) {
+        try {
+          const removed = await removeWork(id)
+          if (removed) {
+            window.toast('삭제에 성공했습니다.')
+            await this.getWork()
+          }
+        } catch (error) {
+          window.toast('삭제에 실패했습니다.')
+          console.error('error:', error)
+        }
+      }
     },
   },
 }
@@ -75,9 +88,6 @@ export default {
   img.work-thumbnail {
     width: 100%;
     height: auto;
-  }
-  &.active {
-    background-color: #eee;
   }
 }
 </style>

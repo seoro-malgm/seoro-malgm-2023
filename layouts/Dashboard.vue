@@ -19,13 +19,15 @@
           <b-col cols="2">
             <ul class="list-unstyled m-0 p-0">
               <li class="m-0" v-for="(tab, i) in tabs" :key="i">
-                <b-btn
-                  :variant="tab.name === path ? 'primary' : 'secondary'"
-                  class="p-3 w-100 text-left"
-                  @click="changeTab(tab.url, tab.name)"
-                >
-                  {{ tab.text }}
-                </b-btn>
+                <template v-if="!tab.hidden">
+                  <b-btn
+                    :variant="tab.name === path ? 'primary' : 'secondary'"
+                    class="p-3 w-100 text-left"
+                    @click="changeTab(tab.url, tab.name)"
+                  >
+                    {{ tab.text }}
+                  </b-btn>
+                </template>
               </li>
             </ul>
           </b-col>
@@ -65,6 +67,12 @@ export default {
           text: '프로젝트 목록',
           url: '',
           name: 'Admin',
+        },
+        {
+          text: '프로젝트 수정',
+          url: 'update',
+          name: 'Admin-Update',
+          hidden: true,
         },
         {
           text: '새 프로젝트',

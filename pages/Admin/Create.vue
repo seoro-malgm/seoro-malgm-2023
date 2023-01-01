@@ -4,13 +4,17 @@
       <b-col cols="4">
         <label for="thumbnail" class="input-thumbnail">
           <template v-if="pending.thumbnail">
-            <b-spinner />
+            <div class="label-text">
+              <b-spinner />
+            </div>
           </template>
           <template v-else-if="!pending.thumbnail">
             <template v-if="form.thumbnailURL">
               <img :src="form.thumbnailURL" alt="새 썸네일" />
             </template>
-            <template v-else> 썸네일을 올려주세요 </template>
+            <template v-else>
+              <span class="label-text"> 썸네일을 올려주세요 </span>
+            </template>
           </template>
         </label>
         <input
@@ -77,53 +81,45 @@
       </b-col>
     </b-row>
 
-    <b-row class="mb-2">
-      <b-col cols="3"> </b-col>
-      <!-- <b-col cols="9">
-        <b-input-group class="mb-4">
-          <b-input-group-append>
-            <span class="py-2 px-3">제목: </span>
-          </b-input-group-append>
-          <b-form-input v-model="form.title" placeholder="제목을 입력하세요" />
-        </b-input-group>
-      </b-col> -->
-    </b-row>
-
     <b-row class="py-2">
-      <b-col cols="5"> 왼쪽내용, form.desc </b-col>
-      <b-col cols="7"> 오른쪽 내용, form.txt </b-col>
-    </b-row>
-    <hr />
-    <b-row align-h="start" class="my-5 py-5">
-      <b-col cols="12" md="3">
-        <b-btn variant="outline-primary w-100">업로드</b-btn>
+      <b-col cols="5">
+        <client-only>
+          <vue-editor
+            useCustomImageHandler
+            @image-added="onImageAdded"
+            v-model="form.desc"
+            @image-removed="onImageRemoved"
+            placeholder="이미지, 영상들을 추가하세요"
+          />
+        </client-only>
+      </b-col>
+      <b-col cols="7">
+        <client-only>
+          <vue-editor v-model="form.txt" placeholder="텍스트를 입력하세요" />
+        </client-only>
       </b-col>
     </b-row>
-    <!-- <pre
-      style="
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        z-index: 3000;
-        background-color: #ededed;
-        padding: 0.5rem;
-        width: 300px;
-        height: 500px;
-        overflow-y: scroll;
-        font-size: 14px;
-        line-height: 17px;
-        color: #000;
-        text-align: left;
-      "
-    >
-    form: {{ form }}
-    </pre> -->
+    <hr />
+    <div class="mt-5">
+      <h6 class="text-primary">데이터 미리보기</h6>
+      <article class="code-preview">
+        <pre
+          >{{ form }}
+        </pre>
+      </article>
+    </div>
+    <b-row align-h="start" class="mt-3">
+      <b-col cols="12" md="3">
+        <b-btn variant="outline-primary w-100" @click="submit">업로드</b-btn>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import { resize } from '~/plugins/commons.js'
-import { getImageURL, deleteImage } from '~/plugins/firebase.js'
+import { getImageURL, deleteImage, addWork } from '~/plugins/firebase.js'
+
 export default {
   layout: 'Dashboard',
   nmae: 'Create',
@@ -151,6 +147,21 @@ export default {
     // console.log('onResize:', this.resize)
   },
   methods: {
+    // form 리셋
+    reset() {
+      const defaultForm = {
+        no: 0,
+        exp: null,
+        workDate: null,
+        party: '이상준',
+        thumbnailURL: null,
+        title: null,
+        desc: null,
+        txt: null,
+        createdAt: null,
+      }
+      this.form = defaultForm
+    },
     // 썸네일 업로드
     async uploadThumbnail(e) {
       const file = e.target.files[0]
@@ -164,6 +175,8 @@ export default {
         deleteImage(`thumbnail/${this.form.thumbnail}`)
       }
       const type = file?.type.split('/').at(-1)
+      const fileName = `thumbnail_${new Date().valueOf()}.${type}`
+
       // todo : gif 이미지 업로드 테스트
       // if (type === 'gif') {
       //   try {
@@ -174,12 +187,13 @@ export default {
       //   }
       // } else {
       // gif 이미지가 아닌 경우 파일 업로드
-      // 가로 1200으로 리사이징하여 url 적용함
-      this.resize.photo('w', file, 1200, 'object', async (result) => {
+      // 가로 1000으로 리사이징하여 url 적용함
+      this.resize.photo('w', file, 1000, 'object', async (result) => {
         const uploadedFile = await getImageURL(
           result.blob,
           result.blob.type,
-          'thumbnail'
+          'thumbnail',
+          fileName
         )
         if (uploadedFile?.url) {
           this.form.thumbnail = uploadedFile.name
@@ -188,6 +202,41 @@ export default {
         }
       })
       // }
+    },
+    onImageAdded(file, Editor, cursorLocation, resetUploader) {
+      // Vue editor 에서 제공하는 이미지핸들러
+      const type = file.name.split('.').at(-1) // split으로 .을 기준으로 두번째 배열인 것을 가져옴, 파일이름은 제외하고 뒤의 확장자만 가져온다
+      const fileName = `image_${new Date().valueOf()}.${type}` // 학장자를 가져오고 그 앞에 초단위의 날짜를 입력하여 이름이 중복되지 않게 한다
+      this.resize.photo('w', file, 1200, 'object', async (result) => {
+        const uploadedFile = await getImageURL(
+          result.blob,
+          result.blob.type,
+          'images',
+          fileName
+        )
+        if (uploadedFile?.url) {
+          Editor.insertEmbed(cursorLocation, 'image', uploadedFile.url) //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
+          resetUploader()
+        }
+      })
+    },
+    // 이미지가 제거되었을 때 file의 url을 불러옴
+    onImageRemoved(url) {
+      deleteImage(url)
+    },
+    // 업로드
+    async submit() {
+      try {
+        const id = await addWork(this.form)
+        if (id) {
+          window.toast('업로드에 성공했습니다.')
+          this.reset()
+          this.$router.push('/admin')
+        }
+      } catch (error) {
+        window.toast('업로드에 실패했습니다.')
+        console.error('error:', error)
+      }
     },
   },
 }
@@ -210,5 +259,18 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  .label-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.code-preview {
+  width: 100%;
+  max-height: 300px;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #ededed;
 }
 </style>

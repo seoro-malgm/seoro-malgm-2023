@@ -11,6 +11,7 @@ const _47528fdf = () => interopDefault(import('../pages/Logout.vue' /* webpackCh
 const _7540db3c = () => interopDefault(import('../pages/Products/index.vue' /* webpackChunkName: "pages/Products/index" */))
 const _996eb91e = () => interopDefault(import('../pages/Admin/Create.vue' /* webpackChunkName: "pages/Admin/Create" */))
 const _c6c82ff8 = () => interopDefault(import('../pages/Admin/Login.vue' /* webpackChunkName: "pages/Admin/Login" */))
+const _50088cbe = () => interopDefault(import('../pages/Admin/Update.vue' /* webpackChunkName: "pages/Admin/Update" */))
 const _5692c362 = () => interopDefault(import('../pages/Blog/_id.vue' /* webpackChunkName: "pages/Blog/_id" */))
 const _367d085e = () => interopDefault(import('../pages/Work/_id.vue' /* webpackChunkName: "pages/Work/_id" */))
 const _f62f4ba6 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -54,6 +55,10 @@ export const routerOptions = {
     path: "/Admin/Login",
     component: _c6c82ff8,
     name: "Admin-Login"
+  }, {
+    path: "/Admin/Update",
+    component: _50088cbe,
+    name: "Admin-Update"
   }, {
     path: "/Blog/:id",
     component: _5692c362,

@@ -23,14 +23,13 @@
 </template>
 
 <script>
-import { db, getAllWorks } from '~/plugins/firebase.js'
+import { getAllWorks } from '~/plugins/firebase.js'
 
 export default {
   layout: 'Default',
   async asyncData() {
     const items = await getAllWorks()
     const categories = [...new Set(items.map((r) => r.exp))]
-    // console.log('items:', items)
     return {
       items,
       categories,
@@ -41,23 +40,6 @@ export default {
       works: null,
       loading: true,
     }
-  },
-  async mounted() {
-    await this.getWork()
-  },
-  methods: {
-    async getWork(category) {
-      this.loading = true
-      if (category) {
-        this.works = this.items.filter((r) => r.exp === category)
-      } else {
-        this.works = this.items
-      }
-      this.loading = false
-    },
-    getWorkLength(category) {
-      return this.items.filter((r) => r.exp === category).length
-    },
   },
 }
 </script>

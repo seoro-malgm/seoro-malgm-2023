@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 export default {
-  mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -222,6 +221,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'vue2-editor/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
