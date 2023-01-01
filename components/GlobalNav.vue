@@ -1,24 +1,26 @@
 <template>
   <nav id="global-nav">
-    <ul class="nav-list">
-      <li class="list-item" v-for="(item, i) in links" :key="i">
-        <template v-if="item.type === 'anchor'">
-          <a class="nuxt-link" :href="item.url" target="_blank">
-            {{ item.name }}</a
-          >
-        </template>
-        <template v-else>
-          <nuxt-link
-            class="nuxt-link"
-            :to="item.url"
-            role="link"
-            v-if="item.requireAuth ? auth : true"
-          >
-            {{ item.name }}
-          </nuxt-link>
-        </template>
-      </li>
-    </ul>
+    <client-only>
+      <ul class="nav-list">
+        <li class="list-item" v-for="(item, i) in links" :key="i">
+          <template v-if="item.type === 'anchor'">
+            <a class="nuxt-link" :href="item.url" target="_blank">
+              {{ item.name }}</a
+            >
+          </template>
+          <template v-else>
+            <nuxt-link
+              class="nuxt-link"
+              :to="item.url"
+              role="link"
+              v-if="item.requireAuth ? auth : true"
+            >
+              {{ item.name }}
+            </nuxt-link>
+          </template>
+        </li>
+      </ul>
+    </client-only>
   </nav>
 </template>
 

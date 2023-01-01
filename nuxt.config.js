@@ -2,7 +2,7 @@ require('dotenv').config()
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-
+  ssr: true,
   head: {
     title: '서로맑음 스튜디오 | Seoro-Malgm Studio',
     htmlAttrs: {
@@ -22,12 +22,13 @@ export default {
         hid: 'description',
         name: 'description',
         property: 'description',
-        content: 'UI/UX, Branding, Calligraphy, Graphic Design',
+        content:
+          '서로맑음 스튜디오는 시각디자인, 브랜딩디자인, 웹디자인, 웹개발 등 다양한 디자인을 통해 유저와 소통합니다. UI/UX, Branding, Calligraphy, Graphic Design',
       },
       {
         name: 'keyword',
         content:
-          'UI/UX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui/ux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너',
+          '서로맑음, 서로맑음 스튜디오, UI/UX, Branding, Calligraphy, Graphic, 프론트엔드, 웹개발, 디자인, 디자이너, 브랜드디자이너, 브랜딩, 웹디자이너, 백엔드, 브랜딩 디자인, 브랜딩 디자이너, ui/ux 디자이너, ux 디자이너, 웹 기획자, 웹 기획, 웹사이트디자인, 웹디자인, 홈페이지디자인, 로고디자인, 시각디자인, 시각디자이너, seoro-malgm.me',
       },
       {
         hid: 'og:image',

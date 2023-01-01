@@ -5,53 +5,55 @@
       <Logo :gatherd="false" />
       <global-nav />
     </header>
-    <main id="main" class="container-fluid">
-      <template v-if="!auth">
-        <div class="text-center my-5 py-5">
-          <b-spinner variant="primary" large />
-        </div>
-      </template>
-      <template v-else>
-        <b-row
-          align-v="stretch"
-          :style="{ minHeight: '800px', maxHeight: '800px' }"
-        >
-          <b-col cols="2">
-            <ul class="list-unstyled m-0 p-0">
-              <li class="m-0" v-for="(tab, i) in tabs" :key="i">
-                <template v-if="!tab.hidden">
-                  <b-btn
-                    :variant="tab.name === path ? 'primary' : 'secondary'"
-                    class="p-3 w-100 text-left"
-                    @click="changeTab(tab.url, tab.name)"
-                  >
-                    {{ tab.text }}
-                  </b-btn>
-                </template>
-              </li>
-            </ul>
-          </b-col>
-          <b-col cols="10">
-            <section
-              class="bg-white w-100 h-100 rounded-lg p-3 position-relative"
-              :style="{ overflowY: 'auto', maxHeight: '800px' }"
-            >
-              <header
-                class="bg-white p-3 position-absolute w-100"
-                :style="{ top: '0', left: '0' }"
+    <client-only>
+      <main id="main" class="container-fluid">
+        <template v-if="!auth">
+          <div class="text-center my-5 py-5">
+            <b-spinner variant="primary" large />
+          </div>
+        </template>
+        <template v-else>
+          <b-row
+            align-v="stretch"
+            :style="{ minHeight: '800px', maxHeight: '800px' }"
+          >
+            <b-col cols="2">
+              <ul class="list-unstyled m-0 p-0">
+                <li class="m-0" v-for="(tab, i) in tabs" :key="i">
+                  <template v-if="!tab.hidden">
+                    <b-btn
+                      :variant="tab.name === path ? 'primary' : 'secondary'"
+                      class="p-3 w-100 text-left"
+                      @click="changeTab(tab.url, tab.name)"
+                    >
+                      {{ tab.text }}
+                    </b-btn>
+                  </template>
+                </li>
+              </ul>
+            </b-col>
+            <b-col cols="10">
+              <section
+                class="bg-white w-100 h-100 rounded-lg p-3 position-relative"
+                :style="{ overflowY: 'auto', maxHeight: '800px' }"
               >
-                <h2 class="text-primary">
-                  {{ currentTab.text }}
-                </h2>
-              </header>
-              <article class="mt-5 py-5">
-                <Nuxt />
-              </article>
-            </section>
-          </b-col>
-        </b-row>
-      </template>
-    </main>
+                <header
+                  class="bg-white p-3 position-absolute w-100"
+                  :style="{ top: '0', left: '0' }"
+                >
+                  <h2 class="text-primary">
+                    {{ currentTab.text }}
+                  </h2>
+                </header>
+                <article class="mt-5 py-5">
+                  <Nuxt />
+                </article>
+              </section>
+            </b-col>
+          </b-row>
+        </template>
+      </main>
+    </client-only>
   </div>
 </template>
 
@@ -101,6 +103,8 @@ export default {
         if (token) {
           // store에 저장
           this.$store.dispatch('setState', ['user', token])
+          // console.log('this.auth:', this.auth)
+          console.log('auth:', this.$store.getters.getUser)
         } else {
           this.$router.push('/admin/login')
         }

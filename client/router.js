@@ -5,13 +5,13 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _5b82250d = () => interopDefault(import('../pages/Admin/index.vue' /* webpackChunkName: "pages/Admin/index" */))
-const _2cd86a7a = () => interopDefault(import('../pages/Blog/index.vue' /* webpackChunkName: "pages/Blog/index" */))
 const _40f4c19b = () => interopDefault(import('../pages/Contact.vue' /* webpackChunkName: "pages/Contact" */))
 const _47528fdf = () => interopDefault(import('../pages/Logout.vue' /* webpackChunkName: "pages/Logout" */))
-const _7540db3c = () => interopDefault(import('../pages/Products/index.vue' /* webpackChunkName: "pages/Products/index" */))
 const _996eb91e = () => interopDefault(import('../pages/Admin/Create.vue' /* webpackChunkName: "pages/Admin/Create" */))
 const _c6c82ff8 = () => interopDefault(import('../pages/Admin/Login.vue' /* webpackChunkName: "pages/Admin/Login" */))
 const _50088cbe = () => interopDefault(import('../pages/Admin/Update.vue' /* webpackChunkName: "pages/Admin/Update" */))
+const _b76aeb4c = () => interopDefault(import('../pages/Blog/Index.vue' /* webpackChunkName: "pages/Blog/Index" */))
+const _269a09c8 = () => interopDefault(import('../pages/Products/Index.vue' /* webpackChunkName: "pages/Products/Index" */))
 const _5692c362 = () => interopDefault(import('../pages/Blog/_id.vue' /* webpackChunkName: "pages/Blog/_id" */))
 const _367d085e = () => interopDefault(import('../pages/Work/_id.vue' /* webpackChunkName: "pages/Work/_id" */))
 const _f62f4ba6 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -32,10 +32,6 @@ export const routerOptions = {
     component: _5b82250d,
     name: "Admin"
   }, {
-    path: "/Blog",
-    component: _2cd86a7a,
-    name: "Blog"
-  }, {
     path: "/Contact",
     component: _40f4c19b,
     name: "Contact"
@@ -43,10 +39,6 @@ export const routerOptions = {
     path: "/Logout",
     component: _47528fdf,
     name: "Logout"
-  }, {
-    path: "/Products",
-    component: _7540db3c,
-    name: "Products"
   }, {
     path: "/Admin/Create",
     component: _996eb91e,
@@ -60,7 +52,15 @@ export const routerOptions = {
     component: _50088cbe,
     name: "Admin-Update"
   }, {
-    path: "/Blog/:id",
+    path: "/Blog/Index",
+    component: _b76aeb4c,
+    name: "Blog-Index"
+  }, {
+    path: "/Products/Index",
+    component: _269a09c8,
+    name: "Products-Index"
+  }, {
+    path: "/Blog/:id?",
     component: _5692c362,
     name: "Blog-id"
   }, {

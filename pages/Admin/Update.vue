@@ -30,7 +30,7 @@
           <b-col cols="8">
             <b-row class="mb-4">
               <b-col cols="2">
-                <b-form-input type="number" v-model="form.no" />
+                <b-form-input type="number" v-model.number="form.no" />
               </b-col>
               <b-col cols="3">
                 <b-form-select v-model="form.exp">
@@ -160,7 +160,7 @@ export default {
         txt: null,
         createdAt: null,
       },
-      categories: ['BX', 'UI/UX', 'POSTER', 'CALLIGRAPHY'],
+      categories: ['BX', 'UI/UX', 'GRAPHIC', 'CALLIGRAPHY'],
       resize,
     }
   },
@@ -278,12 +278,13 @@ export default {
     },
     // 업로드
     async submit() {
+      this.form.createdAt = new Date()
       try {
         const updated = await updateWork(this.id, this.form)
         console.log('updated:', updated)
         if (updated) {
           window.toast('수정에 성공했습니다.')
-          this.reset()
+          // this.reset()
           this.$router.push('/admin')
         }
       } catch (error) {

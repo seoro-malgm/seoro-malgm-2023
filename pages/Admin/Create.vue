@@ -28,7 +28,7 @@
       <b-col cols="8">
         <b-row class="mb-4">
           <b-col cols="2">
-            <b-form-input type="number" v-model="form.no" />
+            <b-form-input type="number" v-model.number="form.no" />
           </b-col>
           <b-col cols="3">
             <b-form-select v-model="form.exp">
@@ -139,7 +139,7 @@ export default {
         txt: null,
         createdAt: null,
       },
-      categories: ['BX', 'UI/UX', 'POSTER', 'CALLIGRAPHY'],
+      categories: ['BX', 'UI/UX', 'GRAPHIC', 'CALLIGRAPHY'],
       resize,
     }
   },
@@ -175,50 +175,65 @@ export default {
         deleteImage(`thumbnail/${this.form.thumbnail}`)
       }
       const type = file?.type.split('/').at(-1)
+      console.log('type:', type)
       const fileName = `thumbnail_${new Date().valueOf()}.${type}`
-
-      // todo : gif 이미지 업로드 테스트
-      // if (type === 'gif') {
-      //   try {
-      //     const url = await getImageURL(file, 'thumbnail/')
-      //     console.log('url:', url)
-      //   } catch (error) {
-      //     window.toast('파일업로드 실패')
-      //   }
-      // } else {
-      // gif 이미지가 아닌 경우 파일 업로드
-      // 가로 1000으로 리사이징하여 url 적용함
-      this.resize.photo('w', file, 1000, 'object', async (result) => {
-        const uploadedFile = await getImageURL(
-          result.blob,
-          result.blob.type,
-          'thumbnail',
-          fileName
-        )
-        if (uploadedFile?.url) {
+      // gif 이미지 업로드
+      if (type === 'gif') {
+        try {
+          const uploadedFile = await getImageURL(file, 'thumbnail/gif/')
           this.form.thumbnail = uploadedFile.name
           this.form.thumbnailURL = uploadedFile.url
           this.pending.thumbnail = false
+        } catch (error) {
+          window.toast('파일업로드 실패')
         }
-      })
-      // }
+      } else {
+        // gif 이미지가 아닌 경우 파일 업로드
+        // 가로 1000으로 리사이징하여 url 적용함
+        this.resize.photo('w', file, 1000, 'object', async (result) => {
+          const uploadedFile = await getImageURL(
+            result.blob,
+            result.blob.type,
+            'thumbnail',
+            fileName
+          )
+          if (uploadedFile?.url) {
+            this.form.thumbnail = uploadedFile.name
+            this.form.thumbnailURL = uploadedFile.url
+            this.pending.thumbnail = false
+          }
+        })
+      }
     },
-    onImageAdded(file, Editor, cursorLocation, resetUploader) {
+    async onImageAdded(file, Editor, cursorLocation, resetUploader) {
       // Vue editor 에서 제공하는 이미지핸들러
       const type = file.name.split('.').at(-1) // split으로 .을 기준으로 두번째 배열인 것을 가져옴, 파일이름은 제외하고 뒤의 확장자만 가져온다
       const fileName = `image_${new Date().valueOf()}.${type}` // 학장자를 가져오고 그 앞에 초단위의 날짜를 입력하여 이름이 중복되지 않게 한다
-      this.resize.photo('w', file, 1200, 'object', async (result) => {
-        const uploadedFile = await getImageURL(
-          result.blob,
-          result.blob.type,
-          'images',
-          fileName
-        )
-        if (uploadedFile?.url) {
-          Editor.insertEmbed(cursorLocation, 'image', uploadedFile.url) //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
-          resetUploader()
+      // gif 이미지 업로드
+      if (type === 'gif') {
+        try {
+          const uploadedFile = await getImageURL(file, 'gif/')
+          if (uploadedFile?.url) {
+            Editor.insertEmbed(cursorLocation, 'image', uploadedFile.url) //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
+            resetUploader()
+          }
+        } catch (error) {
+          window.toast('파일업로드 실패')
         }
-      })
+      } else {
+        this.resize.photo('w', file, 1200, 'object', async (result) => {
+          const uploadedFile = await getImageURL(
+            result.blob,
+            result.blob.type,
+            'images',
+            fileName
+          )
+          if (uploadedFile?.url) {
+            Editor.insertEmbed(cursorLocation, 'image', uploadedFile.url) //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
+            resetUploader()
+          }
+        })
+      }
     },
     // 이미지가 제거되었을 때 file의 url을 불러옴
     onImageRemoved(url) {
@@ -226,11 +241,12 @@ export default {
     },
     // 업로드
     async submit() {
+      this.form.createdAt = new Date()
       try {
         const id = await addWork(this.form)
         if (id) {
           window.toast('업로드에 성공했습니다.')
-          this.reset()
+          // this.reset()
           this.$router.push('/admin')
         }
       } catch (error) {

@@ -3,77 +3,66 @@
     "name": "Admin",
     "path": "/Admin",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Admin/index.vue",
-    "chunkName": "pages/Admin/index",
-    "_name": "_5b82250d"
-  },
-  {
-    "name": "Blog",
-    "path": "/Blog",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/index.vue",
-    "chunkName": "pages/Blog/index",
-    "_name": "_2cd86a7a"
+    "chunkName": "pages/Admin/index"
   },
   {
     "name": "Contact",
     "path": "/Contact",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Contact.vue",
-    "chunkName": "pages/Contact",
-    "_name": "_40f4c19b"
+    "chunkName": "pages/Contact"
   },
   {
     "name": "Logout",
     "path": "/Logout",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Logout.vue",
-    "chunkName": "pages/Logout",
-    "_name": "_47528fdf"
-  },
-  {
-    "name": "Products",
-    "path": "/Products",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Products/index.vue",
-    "chunkName": "pages/Products/index",
-    "_name": "_7540db3c"
+    "chunkName": "pages/Logout"
   },
   {
     "name": "Admin-Create",
     "path": "/Admin/Create",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Admin/Create.vue",
-    "chunkName": "pages/Admin/Create",
-    "_name": "_996eb91e"
+    "chunkName": "pages/Admin/Create"
   },
   {
     "name": "Admin-Login",
     "path": "/Admin/Login",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Admin/Login.vue",
-    "chunkName": "pages/Admin/Login",
-    "_name": "_c6c82ff8"
+    "chunkName": "pages/Admin/Login"
   },
   {
     "name": "Admin-Update",
     "path": "/Admin/Update",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Admin/Update.vue",
-    "chunkName": "pages/Admin/Update",
-    "_name": "_50088cbe"
+    "chunkName": "pages/Admin/Update"
+  },
+  {
+    "name": "Blog-Index",
+    "path": "/Blog/Index",
+    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/Index.vue",
+    "chunkName": "pages/Blog/Index"
+  },
+  {
+    "name": "Products-Index",
+    "path": "/Products/Index",
+    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Products/Index.vue",
+    "chunkName": "pages/Products/Index"
   },
   {
     "name": "Blog-id",
-    "path": "/Blog/:id",
+    "path": "/Blog/:id?",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Blog/_id.vue",
-    "chunkName": "pages/Blog/_id",
-    "_name": "_5692c362"
+    "chunkName": "pages/Blog/_id"
   },
   {
     "name": "Work-id",
     "path": "/Work/:id?",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/Work/_id.vue",
-    "chunkName": "pages/Work/_id",
-    "_name": "_367d085e"
+    "chunkName": "pages/Work/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_f62f4ba6"
+    "chunkName": "pages/index"
   }
 ]

@@ -67,6 +67,7 @@ export default {
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         color: #2f318e;
         background-color: #ededed;
+        box-shadow: 4px 4px 12px rgba($color: #000000, $alpha: 0.09);
         h6 {
           font-weight: 700;
           font-size: 18px;

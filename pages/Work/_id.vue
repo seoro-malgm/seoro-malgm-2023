@@ -176,6 +176,10 @@ export default {
   line-height: 1.8;
   color: #2f318e !important;
 }
+.work-text /deep/ a {
+  color: #888 !important;
+  text-decoration: underline;
+}
 
 .btn-go-top {
   padding: 8px 8px;

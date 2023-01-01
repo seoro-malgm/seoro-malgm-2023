@@ -102,7 +102,7 @@ const getAllWorks = async () => {
         }
       })
       return works.sort((a, b) => {
-        return b.createdAt - a.createdAt
+        return b.no - a.no
       })
     }
   } catch (error) {

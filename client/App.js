@@ -2,9 +2,8 @@ import Vue from 'vue'
 import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-import NuxtError from './components/nuxt-error.vue'
+import NuxtError from '../layouts/error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
-import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 
@@ -15,11 +14,10 @@ import '../assets/styles/index.scss'
 import _51d4d984 from '../layouts/Dashboard.vue'
 import _5ab6bd2a from '../layouts/Default.vue'
 import _758012f7 from '../layouts/Empty.vue'
-import _75825fb2 from '../layouts/Error.vue'
 import _758c751e from '../layouts/Fixed.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_Dashboard": sanitizeComponent(_51d4d984),"_Default": sanitizeComponent(_5ab6bd2a),"_Empty": sanitizeComponent(_758012f7),"_Error": sanitizeComponent(_75825fb2),"_Fixed": sanitizeComponent(_758c751e),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_Dashboard": sanitizeComponent(_51d4d984),"_Default": sanitizeComponent(_5ab6bd2a),"_Empty": sanitizeComponent(_758012f7),"_Fixed": sanitizeComponent(_758c751e),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
@@ -54,7 +52,7 @@ export default {
       }
     }, [
       loadingEl,
-      h(NuxtBuildIndicator),
+
       transitionEl
     ])
   },
@@ -105,6 +103,10 @@ export default {
 
     isFetching () {
       return this.nbFetching > 0
+    },
+
+    isPreview () {
+      return Boolean(this.$options.previewData)
     },
   },
 
@@ -190,10 +192,6 @@ export default {
     },
 
     setLayout (layout) {
-      if(layout && typeof layout !== 'string') {
-        throw new Error('[nuxt] Avoid using non-string value as layout property.')
-      }
-
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }
