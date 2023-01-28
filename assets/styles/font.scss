@@ -208,3 +208,17 @@ $line-heights: (135, 160, 165, 170, 180, 200, 225);
 .text-strike {
   text-decoration: line-through;
 }
+
+.text-truncate {
+  &.line-2 {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.2em;
+    max-height: 2.4em;
+  }
+}

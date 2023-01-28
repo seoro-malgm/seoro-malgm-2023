@@ -102,26 +102,3 @@ $theme-colors: (
 // transition variables
 $ease-out: cubic-bezier(0.03, 0.57, 0.15, 0.99);
 $ease-in-out: cubic-bezier(0.73, 0.33, 0.31, 0.89);
-
-$toast-max-width: 400px;
-.b-toaster {
-  z-index: 3000;
-  * {
-    max-width: unset;
-  }
-  header.toast-header {
-    display: none;
-  }
-  .toast-body {
-    border-radius: 0;
-    background-color: $darkest;
-    color: $secondary;
-  }
-  .b-toaster-slot {
-    min-width: 300px;
-    .b-toast {
-      width: 100%;
-      max-width: 98vw;
-    }
-  }
-}

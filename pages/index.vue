@@ -23,18 +23,20 @@
 </template>
 
 <script>
-import { getAllWorks } from '~/plugins/firebase.js'
+// import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'Default',
-  async asyncData() {
-    const items = await getAllWorks()
+
+  async asyncData({ app, $firebase }) {
+    const items = await $firebase().getAllWorks()
     const categories = [...new Set(items.map((r) => r.exp))]
     return {
       items,
       categories,
     }
   },
+
   data() {
     return {
       works: null,
@@ -65,7 +67,7 @@ export default {
         padding: 16px;
         opacity: 0;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        color: #2f318e;
+        color: $primary;
         background-color: #ededed;
         box-shadow: 4px 4px 12px rgba($color: #000000, $alpha: 0.09);
         h6 {

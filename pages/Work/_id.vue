@@ -10,10 +10,10 @@
         </b-btn>
       </header>
       <b-row tag="section" class="pb-5 pb-md-0">
-        <b-col cols="12" md="8" order="2" order-md="1">
+        <b-col cols="12" md="6" order="2" order-md="1">
           <div class="work-desc" v-html="currentWork.desc" />
         </b-col>
-        <b-col cols="12" md="4" order="1" order-md="2">
+        <b-col cols="12" md="6" order="1" order-md="2">
           <h1 class="work-title">
             {{ currentWork.title }}
           </h1>
@@ -37,12 +37,13 @@
 </template>
 
 <script>
-import { getWork } from '~/plugins/firebase.js'
+// import { getWork } from '~/plugins/firebase.js'
+// import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'Fixed',
-  async asyncData({ params }) {
-    const works = await getWork(params.id)
+  async asyncData({ params, $firebase }) {
+    const works = await $firebase().getWork(params.id)
 
     return {
       id: params.id,
@@ -136,12 +137,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .work-title {
   margin-bottom: 2rem;
   font-size: 3rem;
   font-weight: 900;
-  color: #2f318e !important;
+  color: $primary;
 }
 @media all and (max-width: 768px) {
   .work-title {
@@ -154,38 +155,38 @@ export default {
   }
 }
 
-.work-desc /deep/ p {
+.work-desc::v-deep p {
   margin: 0;
 }
-.work-desc /deep/ iframe {
+.work-desc::v-deep iframe {
   width: 100%;
   height: calc(62vw / 16 * 9);
 }
 @media all and (max-width: 768px) {
-  .work-desc /deep/ iframe {
+  .work-desc::v-deep iframe {
     height: 360px;
   }
 }
-.work-desc /deep/ img {
+.work-desc::v-deep img {
   width: 100%;
   margin-bottom: 24px;
 }
 
-.work-text /deep/ * {
+.work-text::v-deep * {
   font-size: 15px;
   line-height: 1.8;
-  color: #2f318e !important;
+  color: $primary;
 }
-.work-text /deep/ a {
-  color: #888 !important;
+.work-text::v-deep a {
+  color: $gray;
   text-decoration: underline;
 }
 
 .btn-go-top {
   padding: 8px 8px;
   border-radius: 50%;
-  background-color: #ededed !important;
-  border-color: #ededed !important;
+  background-color: $secondary;
+  border-color: $secondary;
   display: flex;
   position: fixed;
   transition: 0.3s;

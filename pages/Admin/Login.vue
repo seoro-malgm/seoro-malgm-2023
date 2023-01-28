@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { login } from '~/plugins/firebase.js'
+// import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'Fixed',
@@ -85,7 +85,7 @@ export default {
   methods: {
     async getAuth(email, password) {
       try {
-        const token = await login(email, password)
+        const token = await this.$firebase().login(email, password)
         if (token) {
           // 세션스토리지에 저장
           sessionStorage.setItem('seoro-malgm-token', token)

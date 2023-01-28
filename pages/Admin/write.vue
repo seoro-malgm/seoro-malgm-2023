@@ -25,13 +25,23 @@
           class="d-none"
         />
       </b-col>
-      <b-col cols="8">
+      <b-col cols="12" class="mt-4">
         <b-row class="mb-4">
-          <b-col cols="2">
+          <b-col cols="1">
             <b-form-input type="number" v-model.number="form.no" />
           </b-col>
           <b-col cols="3">
-            <b-form-select v-model="form.exp">
+            <b-form-datepicker
+              :date-format-options="{
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              }"
+              v-model="form.date"
+            />
+          </b-col>
+          <b-col cols="4">
+            <b-form-select v-model="form.category">
               <b-form-select-option :value="null" disabled>
                 종류
               </b-form-select-option>
@@ -44,45 +54,30 @@
               </b-form-select-option>
             </b-form-select>
           </b-col>
-          <b-col cols="3">
-            <b-form-datepicker
-              :date-format-options="{
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              }"
-              v-model="form.workDate"
-            />
-          </b-col>
-          <b-col cols="4">
-            <b-input-group>
-              <b-input-group-append>
-                <span class="py-2 px-3">작업자: </span>
-              </b-input-group-append>
-              <b-form-input
-                type="text"
-                v-model="form.party"
-                placeholder="작업자를 입력하세요"
-              />
-            </b-input-group>
-          </b-col>
-          <b-col cols="12" class="mt-4">
-            <b-input-group>
-              <b-input-group-append>
-                <span class="py-2 px-3">제목: </span>
-              </b-input-group-append>
-              <b-form-input
-                v-model="form.title"
-                placeholder="제목을 입력하세요"
-              />
-            </b-input-group>
-          </b-col>
         </b-row>
       </b-col>
     </b-row>
 
     <b-row class="py-2">
-      <b-col cols="5">
+      <b-col cols="12">
+        <b-input-group>
+          <b-input-group-append>
+            <span class="py-2 px-3">제목: </span>
+          </b-input-group-append>
+          <b-form-input v-model="form.title" placeholder="제목을 입력하세요" />
+        </b-input-group>
+        <b-input-group class="mt-2">
+          <b-input-group-append>
+            <span class="py-2 px-3">부제목: </span>
+          </b-input-group-append>
+          <b-form-input
+            v-model="form.subtitle"
+            placeholder="부제목을 입력하세요"
+          />
+        </b-input-group>
+      </b-col>
+      <b-col cols="12" class="mt-4">
+        <h6>내용</h6>
         <client-only>
           <vue-editor
             useCustomImageHandler
@@ -91,11 +86,6 @@
             @image-removed="onImageRemoved"
             placeholder="이미지, 영상들을 추가하세요"
           />
-        </client-only>
-      </b-col>
-      <b-col cols="7">
-        <client-only>
-          <vue-editor v-model="form.txt" placeholder="텍스트를 입력하세요" />
         </client-only>
       </b-col>
     </b-row>
@@ -124,11 +114,10 @@
 <script>
 import { resize } from '~/plugins/commons.js'
 // import firebase from '~/plugins/firebase'
-// import { getImageURL, deleteImage, addWork } from '~/plugins/firebase.js'
 
 export default {
   layout: 'Dashboard',
-  name: 'create',
+  name: 'write',
   data() {
     return {
       pending: {
@@ -136,18 +125,26 @@ export default {
       },
       form: {
         no: 0,
-        exp: null,
-        workDate: null,
-        party: '이상준',
+        category: null,
+        date: null,
         thumbnailURL: null,
         title: null,
+        subtitle: null,
         desc: null,
-        txt: null,
         createdAt: null,
       },
-      categories: ['BX', 'UI/UX', 'GRAPHIC', 'CALLIGRAPHY'],
+      categories: [
+        '디자인과 개발 이야기',
+        '지방으로 이주한 디자이너',
+        '일상적 UX',
+        '에세이',
+        '기타',
+      ],
       resize,
     }
+  },
+  mounted() {
+    // console.log('onResize:', this.resize)
   },
   computed: {
     id() {
@@ -168,11 +165,11 @@ export default {
         return
       } else {
         try {
-          const loadWork = await this.$firebase().getWork(id)
-          if (loadWork) {
+          const loadWriting = await this.$firebase().getWriting(id)
+          if (loadWriting) {
             // ref를 찾은 뒤에 form에 적용함
             this.form = {
-              ...loadWork,
+              ...loadWriting,
             }
             // 완료
             this.pending.init = false
@@ -188,13 +185,12 @@ export default {
     reset() {
       const defaultForm = {
         no: 0,
-        exp: null,
-        workDate: null,
-        party: '이상준',
+        category: null,
+        date: null,
         thumbnailURL: null,
         title: null,
+        subtitle: null,
         desc: null,
-        txt: null,
         createdAt: null,
       }
       this.form = defaultForm
@@ -283,11 +279,11 @@ export default {
     async submit() {
       this.form.createdAt = new Date()
       try {
-        const id = await this.$firebase().addWork(this.form)
+        const id = await this.$firebase().addWriting(this.form)
         if (id) {
           window.toast('업로드에 성공했습니다.')
           // this.reset()
-          this.$router.push('/admin')
+          this.$router.push('/admin/writings')
         }
       } catch (error) {
         window.toast('업로드에 실패했습니다.')
@@ -298,12 +294,12 @@ export default {
     async update() {
       this.form.createdAt = new Date()
       try {
-        const updated = await this.$firebase().updateWork(this.id, this.form)
+        const updated = await this.$firebase().updateWriting(this.id, this.form)
         // console.log('updated:', updated)
         if (updated) {
           window.toast('수정에 성공했습니다.')
           // this.reset()
-          this.$router.push('/admin')
+          this.$router.push('/admin/writings')
         }
       } catch (error) {
         window.toast('수정에 실패했습니다.')

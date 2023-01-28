@@ -1,19 +1,8 @@
 <template>
-  <section>
-    <header class="pt-3">
-      <h1 class="fw-700 mb-2 mb-md-4 text-20 text-md-40 text-primary">
-        CONTACT
-      </h1>
-      <p class="mb-3 text-14 text-md-18 text-primary">
-        프로젝트 문의와 채용, 기타 문의 등 모두 메일로 받고 있습니다. <br />
-        아래 연락처들을 통해 언제든 연락 가능합니다.
-      </p>
-    </header>
-    <!-- <section>
-      <b-input></b-input>
-    </section> -->
-    <section class="pt-4">
+  <footer id="gnf">
+    <div class="footer-container">
       <client-only>
+        <h1 class="fw-700 mb-2 text-20 text-primary">CONTACT US</h1>
         <ul class="list-unstyled m-0 p-0">
           <li class="mb-2">
             <span class="text-14 text-md-16 text-primary"
@@ -55,36 +44,33 @@
           </li>
         </ul>
       </client-only>
-    </section>
-  </section>
+    </div>
+  </footer>
 </template>
 
 <script>
 import { copyText, onResize } from '~/plugins/commons.js'
 export default {
-  layout: 'Fixed',
-  head() {
-    return {
-      title: `CONTACT | 서로맑음 스튜디오`,
-    }
-  },
   methods: {
     copyText,
-    // copyText(text, obj) {
-    //   const board = navigator.clipboard
-    //   board
-    //     .writeText(text)
-    //     .then(() => {
-    //       this.$bvToast.toast(`${obj} 클립보드에 복사되었습니다.`, {
-    //         toaster: 'b-toaster-bottom-left',
-    //       })
-    //     })
-    //     .catch((error) => {
-    //       this.$bvToast.toast(`복사에 실패했습니다`)
-    //     })
-    // },
   },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#gnf {
+  padding-top: 320px;
+  padding: 16px 32px 0;
+  .footer-container {
+    background-color: $secondary;
+    min-width: 320px;
+    padding: 1rem;
+    width: 320px;
+    max-width: 90vw;
+    box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
+    border-radius: 1rem;
+    // left: 24px;
+    // bottom: 16px;
+  }
+}
+</style>

@@ -133,16 +133,18 @@
 
 <script>
 import { resize } from '~/plugins/commons.js'
-import {
-  getWork,
-  getImageURL,
-  deleteImage,
-  updateWork,
-} from '~/plugins/firebase.js'
+// import {
+//   getWork,
+//   getImageURL,
+//   deleteImage,
+//   updateWork,
+// } from '~/plugins/firebase.js'
+
+// import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'Dashboard',
-  nmae: 'Update',
+  name: 'update',
   data() {
     return {
       pending: {
@@ -183,7 +185,7 @@ export default {
         return
       } else {
         try {
-          const loadWork = await getWork(id)
+          const loadWork = await this.$firebase().getWork(id)
           if (loadWork) {
             // ref를 찾은 뒤에 form에 적용함
             this.form = {
@@ -232,7 +234,7 @@ export default {
       // todo : gif 이미지 업로드 테스트
       // if (type === 'gif') {
       //   try {
-      //     const url = await getImageURL(file, 'thumbnail/')
+      //     const url = await this.$firebase().getImageURL(file, 'thumbnail/')
       //     console.log('url:', url)
       //   } catch (error) {
       //     window.toast('파일업로드 실패')
@@ -241,7 +243,7 @@ export default {
       // gif 이미지가 아닌 경우 파일 업로드
       // 가로 1000으로 리사이징하여 url 적용함
       this.resize.photo('w', file, 1000, 'object', async (result) => {
-        const uploadedFile = await getImageURL(
+        const uploadedFile = await this.$firebase().getImageURL(
           result.blob,
           result.blob.type,
           'thumbnail',
@@ -260,7 +262,7 @@ export default {
       const type = file.name.split('.').at(-1) // split으로 .을 기준으로 두번째 배열인 것을 가져옴, 파일이름은 제외하고 뒤의 확장자만 가져온다
       const fileName = `image_${new Date().valueOf()}.${type}` // 학장자를 가져오고 그 앞에 초단위의 날짜를 입력하여 이름이 중복되지 않게 한다
       this.resize.photo('w', file, 1200, 'object', async (result) => {
-        const uploadedFile = await getImageURL(
+        const uploadedFile = await this.$firebase().getImageURL(
           result.blob,
           result.blob.type,
           'images',
@@ -280,8 +282,8 @@ export default {
     async submit() {
       this.form.createdAt = new Date()
       try {
-        const updated = await updateWork(this.id, this.form)
-        console.log('updated:', updated)
+        const updated = await this.$firebase().updateWork(this.id, this.form)
+        // console.log('updated:', updated)
         if (updated) {
           window.toast('수정에 성공했습니다.')
           // this.reset()

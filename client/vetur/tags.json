@@ -1,4 +1,7 @@
 {
+  "GlobalFooter": {
+    "description": "Auto imported from components/GlobalFooter.vue"
+  },
   "GlobalNav": {
     "description": "Auto imported from components/GlobalNav.vue"
   },

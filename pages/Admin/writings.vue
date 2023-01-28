@@ -1,18 +1,22 @@
 <template>
   <div>
     <ul class="list-unstyled m-0 p-0">
-      <li v-for="(work, i) in items" :key="i" class="work-item py-2 border-top">
+      <li
+        v-for="(writing, i) in items"
+        :key="i"
+        class="writing-item py-2 border-top"
+      >
         <b-row align-v="center">
-          <b-col cols="1" class="text-center">{{ work.no }}</b-col>
+          <b-col cols="1" class="text-center">{{ writing.no }}</b-col>
           <b-col cols="2">
             <img
-              class="work-thumbnail"
-              :src="work.thumbnailURL"
-              :alt="`${work.title}, 썸네일 이미지`"
+              class="writing-thumbnail"
+              :src="writing.thumbnailURL"
+              :alt="`${writing.title}, 썸네일 이미지`"
             />
           </b-col>
           <b-col cols="7">
-            {{ work.title }}
+            {{ writing?.title }}
           </b-col>
           <b-col cols="2">
             <div class="d-flex flex-column px-4">
@@ -20,15 +24,17 @@
                 variant="outline-gray-dark mb-1"
                 @click="
                   $router.push({
-                    path: '/admin/create',
+                    path: '/admin/write',
                     query: {
-                      id: work.id,
+                      id: writing.id,
                     },
                   })
                 "
                 >수정</b-btn
               >
-              <b-btn variant="outline-red" @click="remove(work.id)">삭제</b-btn>
+              <b-btn variant="outline-red" @click="remove(writing.id)"
+                >삭제</b-btn
+              >
             </div>
           </b-col>
         </b-row>
@@ -38,14 +44,14 @@
 </template>
 
 <script>
-// import { getAllWorks, removeWork } from '~/plugins/firebase.js'
 // import firebase from '~/plugins/firebase'
 
 export default {
   layout: 'Dashboard',
+  name: 'writings',
   async asyncData({ $firebase }) {
-    const items = await $firebase().getAllWorks()
-    const categories = [...new Set(items.map((r) => r.exp))]
+    const items = await $firebase().getAllWritings()
+    // const categories = [...new Set(items.map((r) => r.category))]
     // console.log('items:', items)
     return {
       items,
@@ -60,20 +66,20 @@ export default {
     }
   },
   methods: {
-    async getWork(category) {
+    async getWriting(category) {
       this.loading = true
-      this.items = await this.$firebase().getAllWorks()
-      this.categories = [...new Set(this.items.map((r) => r.exp))]
+      this.items = await this.$firebase().getAllWritings()
+      // this.categories = [...new Set(this.items.map((r) => r.category))]
       this.loading = false
     },
     async remove(id) {
       const bool = await window.confirm('정말로 삭제하시겠습니까?')
       if (bool) {
         try {
-          const removed = await this.$firebase().removeWork(id)
+          const removed = await this.$firebase().removeWriting(id)
           if (removed) {
             window.toast('삭제에 성공했습니다.')
-            await this.getWork()
+            await this.getWriting()
           }
         } catch (error) {
           window.toast('삭제에 실패했습니다.')
@@ -86,8 +92,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.work-item {
-  img.work-thumbnail {
+.writing-item {
+  img.writing-thumbnail {
     width: 100%;
     height: auto;
   }

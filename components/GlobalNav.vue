@@ -35,8 +35,8 @@ export default {
         // },
         {
           name: 'BLOG',
-          url: 'https://brunch.co.kr/@seoro-malgm',
-          type: 'anchor',
+          url: '/blog',
+          // type: 'anchor',
         },
         {
           name: 'PRODUCTS',
@@ -68,12 +68,12 @@ export default {
   position: fixed;
   right: -1px;
   z-index: 2000;
-  @media (max-width: 1280px) {
-    bottom: 0;
-  }
-  @media (min-width: 1280px) {
-    top: 0;
-  }
+  // @media (max-width: 1280px) {
+  //   bottom: 0;
+  // }
+  // @media (min-width: 1280px) {
+  top: 0;
+  // }
 
   padding: 16px;
   .nav-list {
@@ -82,11 +82,16 @@ export default {
     display: flex;
     align-items: center;
     list-style: none;
+    @media (max-width: 1280px) {
+      padding-top: 4px;
+      flex-direction: column;
+      align-items: flex-end;
+      .list-item {
+        margin-bottom: 1rem;
+      }
+    }
     .list-item {
       &:not(:last-child) {
-        @media (max-width: 1280px) {
-          margin-right: 8px;
-        }
         @media (min-width: 1280px) {
           margin-right: 16px;
         }
@@ -94,7 +99,7 @@ export default {
       .nuxt-link {
         background-color: #ededed;
         @media (max-width: 1280px) {
-          font-size: 18px;
+          font-size: 20px;
           padding: 4px 10px;
         }
         @media (min-width: 1280px) {
@@ -103,7 +108,7 @@ export default {
         }
         &.nuxt-link-exact-active,
         &.nuxt-link-active {
-          background-color: #2f318e;
+          background-color: $primary;
           color: #ededed;
           text-decoration: none;
         }

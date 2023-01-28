@@ -9,6 +9,9 @@
     <main id="main" class="container-fluid">
       <Nuxt />
     </main>
+
+    <!-- footer -->
+    <!-- <global-footer /> -->
   </div>
 </template>
 
@@ -51,7 +54,7 @@ export default {
         headerClass: `bg-${opt.variant} p-0 border-0 text-white fw-600`,
         bodyClass: `bg-${opt.variant} py-3 border-0 rounded text-white fw-600`,
         toastClass: 'border-0  pt-0',
-        toaster: 'b-toaster-bottom-center',
+        toaster: 'b-toaster-bottom-left',
       })
     },
   },

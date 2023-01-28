@@ -63,23 +63,33 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      tabIndex: 'Admin',
+      tabIndex: 'admin',
       tabs: [
         {
           text: '프로젝트 목록',
           url: '',
-          name: 'Admin',
+          name: 'admin',
         },
         {
           text: '프로젝트 수정',
           url: 'update',
-          name: 'Admin-Update',
+          name: 'admin-update',
           hidden: true,
         },
         {
           text: '새 프로젝트',
           url: 'create',
-          name: 'Admin-Create',
+          name: 'admin-create',
+        },
+        {
+          text: '글 목록',
+          url: 'writings',
+          name: 'admin-writings',
+        },
+        {
+          text: '새 글',
+          url: 'write',
+          name: 'admin-write',
         },
       ],
     }
@@ -95,6 +105,11 @@ export default {
       return this.tabs.find((t) => t.name === this.path)
     },
   },
+  mounted() {
+    this.checkAuth()
+    window.toast = this.toast
+    // console.log('this.path:', this.path)
+  },
   methods: {
     checkAuth() {
       if (!this.auth) {
@@ -103,8 +118,7 @@ export default {
         if (token) {
           // store에 저장
           this.$store.dispatch('setState', ['user', token])
-          // console.log('this.auth:', this.auth)
-          console.log('auth:', this.$store.getters.getUser)
+          // console.log('auth:', this.$store.getters.getUser)
         } else {
           this.$router.push('/admin/login')
         }
@@ -141,13 +155,9 @@ export default {
         headerClass: `bg-${opt.variant} p-0 border-0 text-white fw-600`,
         bodyClass: `bg-${opt.variant} py-3 border-0 rounded text-white fw-600`,
         toastClass: 'border-0  pt-0',
-        toaster: 'b-toaster-bottom-center',
+        toaster: 'b-toaster-bottom-left',
       })
     },
-  },
-  mounted() {
-    this.checkAuth()
-    window.toast = this.toast
   },
 }
 </script>

@@ -193,14 +193,14 @@ export async function setContext (app, context) {
   if (!app.context) {
     app.context = {
       isStatic: process.static,
-      isDev: false,
+      isDev: true,
       isHMR: false,
       app,
       store: app.store,
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"API_KEY":"AIzaSyAyJHtWMjG-0UJsWiVCUrKSRLUeqwAzhxI","AUTH_DOMAIN":"seoro-malgm.firebaseapp.com","DATABASE_URL":"https://seoro-malgm.firebaseio.com","PROJECT_ID":"seoro-malgm","STORAGE_BUCKET":"seoro-malgm.appspot.com","MESSAGING_SENDER_ID":"158099597201","APP_ID":"1:158099597201:web:4a9cd2142b89e1a301dc30","MEASUREMENT_ID":"G-R7FYNEMFH4"}
+      env: {"API_KEY":"AIzaSyBQ2NaQdLRIpT6LA8W5jzXDzs36soO4xv8","AUTH_DOMAIN":"seoro-malgm-dev.firebaseapp.com","DATABASE_URL":"https://seoro-malgm-dev.firebaseio.com","PROJECT_ID":"seoro-malgm-dev","STORAGE_BUCKET":"seoro-malgm-dev.appspot.com","MESSAGING_SENDER_ID":"719872280412","APP_ID":"1:719872280412:web:742515794155c09f80e39","MEASUREMENT_ID":"G-R7FYNEMFH4"}
     }
     // Only set once
 
@@ -279,7 +279,7 @@ export async function setContext (app, context) {
   app.context.next = context.next
   app.context._redirected = false
   app.context._errored = false
-  app.context.isHMR = false
+  app.context.isHMR = Boolean(context.isHMR)
   app.context.params = app.context.route.params || {}
   app.context.query = app.context.route.query || {}
 }
@@ -297,6 +297,9 @@ export function middlewareSeries (promises, appContext) {
 export function promisify (fn, context) {
   let promise
   if (fn.length === 2) {
+      console.warn('Callback-based asyncData, fetch or middleware calls are deprecated. ' +
+        'Please switch to promises or async/await syntax')
+
     // fn(context, callback)
     promise = new Promise((resolve) => {
       fn(context, function (err, data) {
