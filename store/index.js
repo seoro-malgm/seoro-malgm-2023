@@ -1,6 +1,9 @@
 export const state = () => ({
   // counter: 0,
   user: null,
+  email: 'seoromalgm@gmail.com',
+  instagram: 'https://www.instagram.com/seoro_malgm/',
+  brunch: 'https://brunch.co.kr/@seoro-malgm',
 })
 
 export const getters = {

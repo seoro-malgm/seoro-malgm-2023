@@ -10,6 +10,8 @@ import {
   getDocs,
   deleteDoc,
   collection,
+  query,
+  orderBy,
 } from 'firebase/firestore'
 
 const db = getFirestore(app)
@@ -19,7 +21,8 @@ class worksAPI {
   getAllWorks = async () => {
     try {
       const col = collection(db, 'works')
-      const snapshot = await getDocs(col)
+      const q = query(col, orderBy('no', 'desc'))
+      const snapshot = await getDocs(q)
       if (snapshot) {
         const works = snapshot.docs.map((doc) => {
           return {
@@ -27,9 +30,7 @@ class worksAPI {
             ...doc.data(),
           }
         })
-        return works.sort((a, b) => {
-          return b.no - a.no
-        })
+        return works
       }
     } catch (error) {
       console.error('error::', error)

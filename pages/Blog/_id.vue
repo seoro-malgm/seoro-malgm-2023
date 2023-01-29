@@ -1,42 +1,29 @@
 <template>
   <div class="pt-4 pb-5 writing-wrapper">
     <template v-if="currentWriting">
-      <header class="writing-header">
-        <div
-          class="background-image"
-          :style="{ backgroundImage: `url(${currentWriting.thumbnailURL})` }"
-        />
+      <header
+        class="writing-header"
+        v-if="currentWriting.thumbnailURL"
+        :style="{ backgroundImage: `url(${currentWriting.thumbnailURL})` }"
+      ></header>
+
+      <article class="writing-desc">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-12 col-md-10">
-              <router-link
-                class="writing-category"
-                :to="{
-                  path: '/blog',
-                  query: {
-                    category: currentWriting.category,
-                  },
-                }"
-              >
-                {{ currentWriting.category }}
-              </router-link>
-              <h1 class="writing-title">
+              <div class="writing-category text-gray">
+                {{ categoryToText(currentWriting.category) }}
+              </div>
+              <h1 class="writing-title my-0">
                 {{ currentWriting.title }}
               </h1>
-              <span class="writing-subtitle">
+              <span class="writing-subtitle text-16 text-md-18">
                 {{ currentWriting.subtitle }}
               </span>
             </div>
           </div>
-        </div>
-      </header>
-      <!-- 
-      <header class="mb-2">
-       
-      </header> -->
-      <article class="writing-desc">
-        <div class="container">
-          <div class="row justify-content-center">
+          <hr />
+          <div class="row justify-content-center pt-3 pt-mobile-5">
             <div class="col-12 col-md-10 writing-text">
               <div v-html="currentWriting.desc"></div>
             </div>
@@ -63,6 +50,7 @@
 <script>
 // import { getWriting } from '~/plugins/firebase.js'
 // import firebase from '~/plugins/firebase'
+import categories from '~/utils/categories.json'
 
 export default {
   layout: 'Fixed',
@@ -79,6 +67,7 @@ export default {
   data() {
     return {
       active: false,
+      categories,
     }
   },
   beforeMount() {
@@ -91,6 +80,9 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
+    categoryToText(value) {
+      return this.categories.find((c) => c.value === value).text
+    },
     goTop() {
       window.scrollTo(0, 0)
     },
@@ -163,55 +155,44 @@ export default {
 
 <style lang="scss" scoped>
 .writing-header {
-  position: relative;
+  position: fixed;
   width: 100vw;
-  height: 100vh;
-  padding-bottom: 2rem;
+  padding-bottom: 45%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
   &::after {
     position: fixed;
     content: '';
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    padding-bottom: 45%;
     background-color: rgba($color: #000000, $alpha: 0.2);
     z-index: 1;
   }
-  .background-image {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-  }
-  > .container {
-    margin-top: 65vh;
-    position: relative;
-    z-index: 2;
-  }
-
-  .writing-category {
-    font-size: 13px;
-    padding: 4px 10px;
-    border-radius: 25rem;
-    border: 1px solid $primary;
-    text-decoration: none;
-    margin-bottom: 12px;
-    // display: block;
-  }
-  .writing-title {
-    font-weight: 700;
-    color: $primary;
-    margin-bottom: 12px;
-    margin-top: 8px;
-  }
-  .writing-subtitle {
-    font-weight: 400;
-  }
+}
+.writing-category {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 25rem;
+  border: 1px solid $gray;
+  text-decoration: none;
+  margin-bottom: 12px;
+  // display: block;
+}
+.writing-title {
+  font-weight: 700;
+  // color: $primary;
+  margin-bottom: 12px;
+  margin-top: 8px;
+}
+.writing-subtitle {
+  font-weight: 400;
 }
 
 .writing-desc {
@@ -219,18 +200,19 @@ export default {
   padding: 4rem 1.5rem 200px;
   background-color: white;
   position: absolute;
+  top: calc(100vw * 45 / 100);
   left: 50%;
   transform: translateX(-50%);
   font-size: 16px;
   line-height: 1.9;
   letter-spacing: -0.2px;
-  z-index: 10;
+  z-index: 1;
 }
 .writing-title {
   margin-bottom: 2rem;
   font-size: 3rem;
   font-weight: 900;
-  color: $primary;
+  // color: $primary;
 }
 @media all and (max-width: 768px) {
   .writing-title {

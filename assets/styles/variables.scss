@@ -67,6 +67,7 @@ $secondary: #ededed;
 $darkest: #222;
 $gray: #444;
 $light: #777;
+$error: #ff0a5c;
 
 $toast-max-width: 50px;
 $theme-colors: (
@@ -89,6 +90,7 @@ $theme-colors: (
   'cyan': $cyan,
   'white': $white,
   'gray-dark': $gray-800,
+  'error': $error,
 ) !default;
 
 // variant

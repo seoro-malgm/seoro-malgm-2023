@@ -10,6 +10,7 @@
           <b-col cols="1" class="text-center">{{ writing.no }}</b-col>
           <b-col cols="2">
             <img
+              v-if="writing.thumbnailURL"
               class="writing-thumbnail"
               :src="writing.thumbnailURL"
               :alt="`${writing.title}, 썸네일 이미지`"
@@ -45,6 +46,7 @@
 
 <script>
 // import firebase from '~/plugins/firebase'
+// import categories from '~/utils/categories.json'
 
 export default {
   layout: 'Dashboard',
@@ -55,13 +57,12 @@ export default {
     // console.log('items:', items)
     return {
       items,
-      categories,
     }
   },
   data() {
     return {
       items: [],
-      categories: [],
+      // categories,
       loading: false,
     }
   },

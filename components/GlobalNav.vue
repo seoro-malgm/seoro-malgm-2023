@@ -5,8 +5,9 @@
         <li class="list-item" v-for="(item, i) in links" :key="i">
           <template v-if="item.type === 'anchor'">
             <a class="nuxt-link" :href="item.url" target="_blank">
-              {{ item.name }}</a
-            >
+              {{ item.name }}
+              <div class="alarm-dot" v-if="item.isNew">new</div>
+            </a>
           </template>
           <template v-else>
             <nuxt-link
@@ -16,6 +17,7 @@
               v-if="item.requireAuth ? auth : true"
             >
               {{ item.name }}
+              <div class="alarm-dot" v-if="item.isNew">new</div>
             </nuxt-link>
           </template>
         </li>
@@ -35,13 +37,14 @@ export default {
         // },
         {
           name: 'BLOG',
-          url: '/blog',
+          url: '/blog?category',
           // type: 'anchor',
         },
         {
           name: 'PRODUCTS',
           url: 'https://marpple.shop/kr/seoro_malgm',
           type: 'anchor',
+          isNew: true,
         },
         {
           name: 'CONTACT',
@@ -98,6 +101,7 @@ export default {
       }
       .nuxt-link {
         background-color: #ededed;
+        position: relative;
         @media (max-width: 1280px) {
           font-size: 20px;
           padding: 4px 10px;
@@ -114,6 +118,14 @@ export default {
         }
       }
     }
+  }
+}
+.alarm-dot {
+  top: -6px;
+  right: -10px;
+  @media (min-width: 1280px) {
+    top: 2px;
+    right: -8px;
   }
 }
 </style>

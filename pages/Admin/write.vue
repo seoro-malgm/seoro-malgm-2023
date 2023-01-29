@@ -48,9 +48,9 @@
               <b-form-select-option
                 v-for="(option, i) in categories"
                 :key="i"
-                :value="option"
+                :value="option.value"
               >
-                {{ option }}
+                {{ option.text }}
               </b-form-select-option>
             </b-form-select>
           </b-col>
@@ -114,6 +114,7 @@
 <script>
 import { resize } from '~/plugins/commons.js'
 // import firebase from '~/plugins/firebase'
+import categories from '~/utils/categories.json'
 
 export default {
   layout: 'Dashboard',
@@ -133,13 +134,7 @@ export default {
         desc: null,
         createdAt: null,
       },
-      categories: [
-        '디자인과 개발 이야기',
-        '지방으로 이주한 디자이너',
-        '일상적 UX',
-        '에세이',
-        '기타',
-      ],
+      categories,
       resize,
     }
   },

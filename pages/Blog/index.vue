@@ -6,26 +6,38 @@
         <client-only>
           <li class="category-item" v-for="(item, i) in categories">
             <router-link
-              class="category-link"
+              class="category-link text-14 text-md-18"
               :to="{
                 path: '/blog',
                 query: {
-                  category: item,
+                  category: item.value,
                 },
               }"
             >
-              {{ item }}
+              {{ item.text }}
+              <div class="alarm-dot">
+                {{ getLength(item.value) }}
+              </div>
             </router-link>
           </li>
         </client-only>
       </ul>
     </header>
     <client-only>
-      <ul class="list-unstyled m-0 p-0">
+      <template v-if="!itemFilterd?.length">
+        <div
+          class="d-flex flex-column p-5 my-5 align-items-center justify-content-center"
+        >
+          <img src="~/assets/on-error.png" :style="{ width: '200px' }" />
+          <strong class="mt-2">아직 글이 없습니다.</strong>
+        </div>
+      </template>
+
+      <ul class="list-unstyled m-0 p-0" v-else>
         <li
           v-for="(writing, i) in itemFilterd"
           :key="i"
-          class="writing-item py-2 border-top"
+          class="writing-item pt-2 mb-3 border-top"
           @click="$router.push(`/blog/${writing.id}`)"
         >
           <b-row align-v="start">
@@ -49,7 +61,7 @@
                     },
                   }"
                 >
-                  {{ writing.category }}
+                  {{ categoryToText(writing.category) }}
                 </router-link>
                 <div class="title">
                   <h6 class="writing-title">
@@ -80,7 +92,7 @@
     <div class="pt-3 border-top">
       <b-btn
         variant="link p-0 text-16 mt-n1"
-        href="https://brunch.co.kr/@seoro-malgm"
+        :href="$store.state.brunch"
         target="_blank"
       >
         Brunch 블로그 </b-btn
@@ -91,36 +103,29 @@
 
 <script>
 // import firebase from '~/plugins/firebase'
+import categories from '~/utils/categories.json'
 
 export default {
   layout: 'Fixed',
   name: 'writings',
-  async asyncData({ app, $firebase }) {
+  async asyncData({ app, context, $firebase }) {
+    const { route } = app?.context
+    // const category = route?.query?.category
     const items = await $firebase().getAllWritings()
-    // const categories = [...new Set(items.map((r) => r.exp))]
-    // console.log('items:', items)
     return {
       items,
-      // categories,
     }
   },
   data() {
     return {
       items: [],
-      categories: [
-        '전체',
-        '디자인과 개발 이야기',
-        '지방으로 이주한 디자이너',
-        '일상적 UX',
-        '에세이',
-        '기타',
-      ],
+      categories,
       loading: false,
     }
   },
   computed: {
     categorySelected() {
-      return this.$route.query?.category
+      return this.$route.query?.category || ''
     },
     itemFilterd() {
       return this.categorySelected
@@ -128,10 +133,23 @@ export default {
         : this.items
     },
   },
+  watch: {
+    categorySelected(n) {
+      this.getWriting(n)
+    },
+  },
   methods: {
+    categoryToText(value) {
+      return this.categories.find((c) => c.value === value)?.text || '에세이'
+    },
+    getLength(value) {
+      return value
+        ? this.items.filter((item) => item.category === value).length
+        : this.items.length
+    },
     async getWriting(category) {
       this.loading = true
-      this.items = await this.$firebase().getAllWritings()
+      this.items = await this.$firebase().getAllWritings(category)
       // this.categories = [...new Set(this.items.map((r) => r.category))]
       this.loading = false
     },
@@ -191,9 +209,18 @@ export default {
     font-weight: 400;
   }
 
-  .writing-desc::v-deep p {
+  .writing-desc {
     font-size: 14px;
     margin-top: 2px;
+    font-weight: 400;
+    color: $light;
+    pointer-events: none;
+  }
+
+  .writing-desc::v-deep * {
+    font-size: 14px;
+    margin-top: 2px;
+    font-weight: 400;
     color: $light;
   }
 }
@@ -206,11 +233,12 @@ export default {
   flex-wrap: wrap;
   .category-item {
     margin-right: 16px;
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 8px;
     display: inline-block;
     width: nowrap;
     .category-link {
+      position: relative;
       border-radius: 25rem;
       padding: 4px 10px;
       border: 1px solid $primary;

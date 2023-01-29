@@ -20,8 +20,8 @@
               >Email:
               <a
                 role="button"
-                @click="copyText('seoromalgm@gmail.com', '이메일주소가')"
-                >seoromalgm@gmail.com
+                @click="copyText($store.state.email, '이메일주소가')"
+                >{{ $store.state.email }}
               </a>
             </span>
           </li>
@@ -40,7 +40,7 @@
           <li class="mb-2">
             <b-btn
               variant="link p-0 text-14 text-md-16"
-              href="https://www.instagram.com/seoro_malgm/"
+              :href="$store.state.instagram"
               target="_blank"
               >Instagram</b-btn
             >
@@ -48,7 +48,7 @@
           <li class="mb-2">
             <b-btn
               variant="link  p-0 text-14 text-md-16"
-              href="https://brunch.co.kr/@seoro-malgm"
+              :href="$store.state.brunch"
               target="_blank"
               >Brunch</b-btn
             >

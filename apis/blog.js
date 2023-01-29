@@ -10,16 +10,22 @@ import {
   getDocs,
   deleteDoc,
   collection,
+  query,
+  // where,
+  orderBy,
 } from 'firebase/firestore'
 
 const db = getFirestore(app)
 
 class blogAPI {
   // writing 전체 불러오기
-  getAllWritings = async () => {
+  getAllWritings = async (category = null) => {
     try {
       const col = collection(db, 'writings')
-      const snapshot = await getDocs(col)
+
+      // const q = query(col, category ? where('category', '==', category) : null)
+      const q = query(col, orderBy('no', 'desc'))
+      const snapshot = await getDocs(q)
       if (snapshot) {
         const writings = snapshot.docs.map((doc) => {
           return {
@@ -27,9 +33,7 @@ class blogAPI {
             ...doc.data(),
           }
         })
-        return writings.sort((a, b) => {
-          return b.no - a.no
-        })
+        return writings
       }
     } catch (error) {
       console.error('error::', error)
