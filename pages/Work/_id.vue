@@ -61,6 +61,9 @@ export default {
     // 스크롤 핸들러
     window.addEventListener('scroll', this.handleScroll)
   },
+  mounted() {
+    this.$firebase().addViewer('works', this.id)
+  },
   beforeDestroy() {
     if (this.path !== 'index') return
     // 스크롤 핸들러 해제
@@ -160,7 +163,7 @@ export default {
 }
 .work-desc::v-deep iframe {
   width: 100%;
-  height: calc(62vw / 16 * 9);
+  height: 560px;
 }
 @media all and (max-width: 768px) {
   .work-desc::v-deep iframe {

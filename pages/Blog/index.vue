@@ -1,12 +1,21 @@
 <template>
   <div class="container py-5">
     <header class="mb-4">
-      <h1 class="fw-700 mb-2 mb-md-4 text-20 text-md-40 text-primary">BLOG</h1>
-      <ul class="category-list">
+      <h1 class="fw-700 text-20 text-md-40 text-primary">BLOG</h1>
+      <div class="mt-2">
+        <b-btn
+          variant="link p-0 text-16 mt-n1"
+          :href="$store.state.brunch"
+          target="_blank"
+        >
+          Brunch 블로그 </b-btn
+        >에서도 글들을 볼 수 있습니다.
+      </div>
+      <ul class="category-list pt-4">
         <client-only>
           <li class="category-item" v-for="(item, i) in categories">
             <router-link
-              class="category-link text-14 text-md-18"
+              class="category-link text-14 text-md-20"
               :to="{
                 path: '/blog',
                 query: {
@@ -42,27 +51,23 @@
         >
           <b-row align-v="start">
             <b-col cols="4" md="3" lg="2">
-              <div class="bg-img ratio-90">
+              <div
+                class="bg-img ratio-90"
+                :class="{ 'bg-lightest': !writing.thumbnailURL }"
+              >
                 <img
                   class="writing-thumbnail"
                   :src="writing.thumbnailURL"
                   :alt="`${writing.title}, 썸네일 이미지`"
+                  v-if="writing.thumbnailURL"
                 />
               </div>
             </b-col>
             <b-col cols="8" md="9" lg="10">
               <div class="writing-info my-2">
-                <router-link
-                  class="writing-category"
-                  :to="{
-                    path: '/blog',
-                    query: {
-                      category: writing.category,
-                    },
-                  }"
-                >
+                <div class="writing-category">
                   {{ categoryToText(writing.category) }}
-                </router-link>
+                </div>
                 <div class="title">
                   <h6 class="writing-title">
                     {{ writing.title }}
@@ -147,9 +152,9 @@ export default {
         ? this.items.filter((item) => item.category === value).length
         : this.items.length
     },
-    async getWriting(category) {
+    async getWriting() {
       this.loading = true
-      this.items = await this.$firebase().getAllWritings(category)
+      this.items = await this.$firebase().getAllWritings()
       // this.categories = [...new Set(this.items.map((r) => r.category))]
       this.loading = false
     },
@@ -213,7 +218,7 @@ export default {
     font-size: 14px;
     margin-top: 2px;
     font-weight: 400;
-    color: $light;
+    color: $light !important;
     pointer-events: none;
   }
 
@@ -221,7 +226,7 @@ export default {
     font-size: 14px;
     margin-top: 2px;
     font-weight: 400;
-    color: $light;
+    color: $light !important;
   }
 }
 
@@ -235,12 +240,18 @@ export default {
     margin-right: 16px;
     font-size: 16px;
     margin-bottom: 8px;
+    @media (min-width: 1024px) {
+      margin-bottom: 20px;
+    }
     display: inline-block;
     width: nowrap;
     .category-link {
       position: relative;
       border-radius: 25rem;
       padding: 4px 10px;
+      @media (min-width: 1024px) {
+        padding: 6px 12px;
+      }
       border: 1px solid $primary;
       color: $primary;
       text-decoration: none;

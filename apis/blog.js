@@ -19,7 +19,7 @@ const db = getFirestore(app)
 
 class blogAPI {
   // writing 전체 불러오기
-  getAllWritings = async (category = null) => {
+  getAllWritings = async () => {
     try {
       const col = collection(db, 'writings')
 

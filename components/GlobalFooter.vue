@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { copyText, onResize } from '~/plugins/commons.js'
+import { copyText } from '~/plugins/commons.js'
 export default {
   methods: {
     copyText,

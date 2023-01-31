@@ -12,6 +12,8 @@ import {
   collection,
   query,
   orderBy,
+  updateDoc,
+  increment,
 } from 'firebase/firestore'
 
 const db = getFirestore(app)
@@ -70,6 +72,15 @@ class worksAPI {
   updateWork = async (id, data) => {
     await setDoc(doc(db, 'works', id), data)
     return true
+  }
+
+  // 조회수 추가
+  addViewer = async (collection, id) => {
+    const ref = doc(db, collection, id)
+    const e = await updateDoc(ref, {
+      viewer: increment(1),
+    })
+    console.log('e:', e)
   }
 }
 

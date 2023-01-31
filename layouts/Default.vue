@@ -114,7 +114,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #app {
-  padding: 16px 0;
+  // padding: 16px 0;
   #main {
     padding-top: 100vh;
     overflow-y: unset;

@@ -2,7 +2,12 @@
   <nav id="global-nav">
     <client-only>
       <ul class="nav-list">
-        <li class="list-item" v-for="(item, i) in links" :key="i">
+        <li
+          class="list-item"
+          v-for="(item, i) in links"
+          :key="i"
+          v-if="item.requireAuth ? auth : true"
+        >
           <template v-if="item.type === 'anchor'">
             <a class="nuxt-link" :href="item.url" target="_blank">
               {{ item.name }}
@@ -10,12 +15,7 @@
             </a>
           </template>
           <template v-else>
-            <nuxt-link
-              class="nuxt-link"
-              :to="item.url"
-              role="link"
-              v-if="item.requireAuth ? auth : true"
-            >
+            <nuxt-link class="nuxt-link" :to="item.url" role="link">
               {{ item.name }}
               <div class="alarm-dot" v-if="item.isNew">new</div>
             </nuxt-link>
@@ -90,7 +90,7 @@ export default {
       flex-direction: column;
       align-items: flex-end;
       .list-item {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
     }
     .list-item {
@@ -100,10 +100,10 @@ export default {
         }
       }
       .nuxt-link {
-        background-color: #ededed;
+        background-color: transparent;
         position: relative;
         @media (max-width: 1280px) {
-          font-size: 20px;
+          font-size: 18px;
           padding: 4px 10px;
         }
         @media (min-width: 1280px) {

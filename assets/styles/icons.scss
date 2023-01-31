@@ -21,7 +21,7 @@ $icon-size: (
   40,
   56
 );
-$icons: (plus-sqaure);
+$icons: (eye);
 .icon {
   min-width: 16px;
   min-height: 16px;
@@ -40,7 +40,7 @@ $icons: (plus-sqaure);
 
   @each $var in $icons {
     &.icon-#{$var} {
-      background-image: url('/assets/icons/#{$var}.svg');
+      background-image: url('../icons/icon-#{$var}.svg');
     }
   }
   @each $var in $icon-size {

@@ -19,5 +19,8 @@
   },
   "IconArrTop": {
     "description": "Auto imported from components/icon/ArrTop.vue"
+  },
+  "IconLink": {
+    "description": "Auto imported from components/icon/Link.vue"
   }
 }
