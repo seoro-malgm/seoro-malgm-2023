@@ -56,7 +56,7 @@ class blogAPI {
   // writing 추가
   addWriting = async (data) => {
     const docRef = await addDoc(collection(db, 'writings'), data)
-    console.log('docRef:', docRef)
+    // console.log('docRef:', docRef)
     if (docRef?.id) {
       return docRef.id
     }

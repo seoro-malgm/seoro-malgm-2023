@@ -206,6 +206,12 @@ export default {
         implementation: require('sass'),
       },
     },
+    html: {
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
+    },
   },
   buildDir: 'client',
   generate: {
@@ -238,7 +244,6 @@ export default {
   // 환경변수
   env: {
     ENV: process.env.ENV,
-    API_KEY: process.env.API_KEY,
     API_KEY: process.env.API_KEY,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
     DATABASE_URL: process.env.DATABASE_URL,

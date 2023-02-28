@@ -124,7 +124,7 @@
 <script>
 import { resize } from '~/plugins/commons.js'
 // import firebase from '~/plugins/firebase'
-// import { getImageURL, deleteImage, addWork } from '~/plugins/firebase.js'
+// import { getImageURL, this.$firebase().deleteImage, addWork } from '~/plugins/firebase.js'
 
 export default {
   layout: 'Dashboard',
@@ -209,7 +209,7 @@ export default {
       this.pending.thumbnail = true
       // 이미 올린 썸네일이 있으면 그건 삭제함
       if (this.form.thumbnail) {
-        deleteImage(`thumbnail/${this.form.thumbnail}`)
+        this.$firebase().deleteImage(`thumbnail/${this.form.thumbnail}`)
       }
       const type = file?.type.split('/').at(-1)
       // console.log('type:', type)
@@ -277,7 +277,7 @@ export default {
     },
     // 이미지가 제거되었을 때 file의 url을 불러옴
     onImageRemoved(url) {
-      deleteImage(url)
+      this.$firebase().deleteImage(url)
     },
     // 업로드
     async submit() {

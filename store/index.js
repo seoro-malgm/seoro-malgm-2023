@@ -1,6 +1,7 @@
 export const state = () => ({
   // counter: 0,
   user: null,
+  website: 'https://seoro-malgm.studio/',
   email: 'seoromalgm@gmail.com',
   instagram: 'https://www.instagram.com/seoro_malgm/',
   brunch: 'https://brunch.co.kr/@seoro-malgm',

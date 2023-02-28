@@ -1,80 +1,83 @@
 <template>
   <div class="pt-4 pb-5 writing-wrapper">
     <template v-if="currentWriting">
-      <header
-        class="writing-header"
-        v-if="currentWriting.thumbnailURL"
-        :style="{ backgroundImage: `url(${currentWriting.thumbnailURL})` }"
-      ></header>
+      <client-only>
+        <header
+          class="writing-header"
+          v-if="currentWriting.thumbnailURL"
+          :style="{ backgroundImage: `url(${currentWriting.thumbnailURL})` }"
+        ></header>
 
-      <article class="writing-desc">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-9 px-0">
-              <div class="d-flex align-items-center mb-3">
-                <router-link
-                  class="writing-category d-inline-block"
-                  :to="{
-                    path: '/blog',
-                    query: {
-                      category: currentWriting.category,
-                    },
-                  }"
-                >
-                  {{ categoryToText(currentWriting.category) }}
-                </router-link>
-                <div
-                  class="d-flex align-items-center ml-auto position-relative"
-                  id="viewer"
-                >
-                  <img
-                    src="~/assets/icons/icon-eye.svg"
-                    alt="조회수"
-                    class="icon icon-16 m-0"
-                  />
-                  <small class="text-12 text-light ml-1">
-                    {{ ccurrentWriting?.viewer + 1 || 0 }}
-                  </small>
+        <article class="writing-desc">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-10 col-lg-9 px-0">
+                <div class="d-flex align-items-center mb-3">
+                  <router-link
+                    class="writing-category d-inline-block"
+                    :to="{
+                      path: '/blog',
+                      query: {
+                        category: currentWriting.category,
+                      },
+                    }"
+                  >
+                    {{ categoryToText(currentWriting.category) }}
+                  </router-link>
+                  <div
+                    class="d-flex align-items-center ml-auto position-relative"
+                    id="viewer"
+                  >
+                    <img
+                      src="~/assets/icons/icon-eye.svg"
+                      alt="조회수"
+                      class="icon icon-16 m-0"
+                    />
+                    <small class="text-12 text-light ml-1">
+                      {{ currentWriting?.viewer + 1 || 0 }}
+                    </small>
+                  </div>
                 </div>
+                <h1 class="writing-title my-0">
+                  {{ currentWriting.title }}
+                </h1>
+                <span class="writing-subtitle text-16 text-md-18 text-light">
+                  {{ currentWriting.subtitle }}
+                </span>
               </div>
-              <h1 class="writing-title my-0">
-                {{ currentWriting.title }}
-              </h1>
-              <span class="writing-subtitle text-16 text-md-18 text-light">
-                {{ currentWriting.subtitle }}
-              </span>
+            </div>
+            <hr />
+            <div class="row justify-content-center pt-3 pt-mobile-5">
+              <div class="col-12 col-md-10 col-lg-9 px-0 writing-text">
+                <div v-html="currentWriting.desc"></div>
+              </div>
             </div>
           </div>
-          <hr />
-          <div class="row justify-content-center pt-3 pt-mobile-5">
-            <div class="col-12 col-md-10 col-lg-9 px-0 writing-text">
-              <div v-html="currentWriting.desc"></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <b-btn
-        variant="secondary btn-util btn-go-top d-inline-flex align-items-center shadow"
-        :class="{ active }"
-        @click="goTop"
-        aria-label="맨 위로 이동 버튼"
-        aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
-      >
-        <icon-arr-top />
-      </b-btn>
-      <b-btn
-        variant="secondary btn-util btn-copy d-inline-flex align-items-center shadow"
-        :class="{ active }"
-        @click="copyText('https://seoro-malgm.studio' + path)"
-        aria-label="링크 복사 버튼"
-        aria-description="현재 링크를 복사하는 이동시키는 버튼입니다"
-      >
-        <icon-link />
-      </b-btn>
+        </article>
+        <b-btn
+          variant="secondary btn-util btn-go-top d-inline-flex align-items-center shadow"
+          :class="{ active }"
+          @click="goTop"
+          aria-label="맨 위로 이동 버튼"
+          aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
+        >
+          <icon-arr-top />
+        </b-btn>
+        <b-btn
+          variant="secondary btn-util btn-copy d-inline-flex align-items-center shadow"
+          :class="{ active }"
+          @click="copyText('https://seoro-malgm.studio' + path)"
+          aria-label="링크 복사 버튼"
+          aria-description="현재 링크를 복사하는 이동시키는 버튼입니다"
+        >
+          <icon-link />
+        </b-btn>
+      </client-only>
     </template>
     <template v-else>
-      <Loading />
+      <client-only>
+        <Loading />
+      </client-only>
     </template>
     <b-tooltip target="viewer" placement="bottom" trigger="hover">
       조회수 : {{ currentWriting?.viewer + 1 || 0 }}
@@ -171,11 +174,9 @@ export default {
       return this.$route.fullPath
     },
   },
-  beforeMount() {
+  mounted() {
     // 스크롤 핸들러
     window.addEventListener('scroll', this.handleScroll)
-  },
-  mounted() {
     this.$firebase().addViewer('writings', this.id)
   },
   beforeDestroy() {

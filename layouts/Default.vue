@@ -2,7 +2,9 @@
   <div id="app">
     <header>
       <!-- 로고 -->
-      <Logo :gatherd="onGathered" />
+      <client-only>
+        <Logo :gatherd="onGathered" />
+      </client-only>
       <global-nav />
     </header>
     <!-- scroll down -->
@@ -12,15 +14,17 @@
     </div>
 
     <!-- scroll up btn -->
-    <b-btn
-      variant="secondary btn-go-top d-inline-flex align-items-center shadow"
-      :class="{ active: scrollUpActive }"
-      @click="goTop"
-      aria-label="맨 위로 이동 버튼"
-      aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
-    >
-      <icon-arr-top />
-    </b-btn>
+    <client-only>
+      <b-btn
+        variant="secondary btn-go-top d-inline-flex align-items-center shadow"
+        :class="{ active: scrollUpActive }"
+        @click="goTop"
+        aria-label="맨 위로 이동 버튼"
+        aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
+      >
+        <icon-arr-top />
+      </b-btn>
+    </client-only>
 
     <!-- 내용 -->
     <main id="main" class="container-fluid" :class="{ active: !onGathered }">
@@ -46,11 +50,9 @@ export default {
       return this.$nuxt.$route.name
     },
   },
-  beforeMount() {
+  mounted() {
     // 스크롤 핸들러
     window.addEventListener('scroll', this.handleScroll)
-  },
-  mounted() {
     window.toast = this.toast
   },
   beforeDestroy() {

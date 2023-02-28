@@ -1,37 +1,41 @@
 <template>
   <div class="pt-4 pb-5 work-wrapper">
     <template v-if="currentWork">
-      <header class="mb-2">
+      <client-only>
+        <header class="mb-2">
+          <b-btn
+            variant="text mb-0 p-0 d-flex d-md-none text-primary d-inline-flex align-items-center"
+            to="/"
+          >
+            <icon-arr-back /> <span class="ml-2 fw-700">GO BACK</span>
+          </b-btn>
+        </header>
+        <b-row tag="section" class="pb-5 pb-md-0">
+          <b-col cols="12" md="6" order="2" order-md="1">
+            <div class="work-desc" v-html="currentWork.desc" />
+          </b-col>
+          <b-col cols="12" md="6" order="1" order-md="2">
+            <h1 class="work-title">
+              {{ currentWork.title }}
+            </h1>
+            <div class="work-text" v-html="currentWork.txt" />
+          </b-col>
+        </b-row>
         <b-btn
-          variant="text mb-0 p-0 d-flex d-md-none text-primary d-inline-flex align-items-center"
-          to="/"
+          variant="secondary btn-go-top d-inline-flex align-items-center shadow"
+          :class="{ active }"
+          @click="goTop"
+          aria-label="맨 위로 이동 버튼"
+          aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
         >
-          <icon-arr-back /> <span class="ml-2 fw-700">GO BACK</span>
+          <icon-arr-top />
         </b-btn>
-      </header>
-      <b-row tag="section" class="pb-5 pb-md-0">
-        <b-col cols="12" md="6" order="2" order-md="1">
-          <div class="work-desc" v-html="currentWork.desc" />
-        </b-col>
-        <b-col cols="12" md="6" order="1" order-md="2">
-          <h1 class="work-title">
-            {{ currentWork.title }}
-          </h1>
-          <div class="work-text" v-html="currentWork.txt" />
-        </b-col>
-      </b-row>
-      <b-btn
-        variant="secondary btn-go-top d-inline-flex align-items-center shadow"
-        :class="{ active }"
-        @click="goTop"
-        aria-label="맨 위로 이동 버튼"
-        aria-description="스크롤을 맨 위로 이동시키는 버튼입니다"
-      >
-        <icon-arr-top />
-      </b-btn>
+      </client-only>
     </template>
     <template v-else>
-      <Loading />
+      <client-only>
+        <Loading />
+      </client-only>
     </template>
   </div>
 </template>
@@ -44,6 +48,7 @@ export default {
   layout: 'Fixed',
   async asyncData({ params, $firebase }) {
     const works = await $firebase().getWork(params.id)
+    // console.log('works:', works)
 
     return {
       id: params.id,
@@ -57,16 +62,12 @@ export default {
       active: false,
     }
   },
-  beforeMount() {
-    // 스크롤 핸들러
-    window.addEventListener('scroll', this.handleScroll)
-  },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll)
     this.$firebase().addViewer('works', this.id)
   },
   beforeDestroy() {
     if (this.path !== 'index') return
-    // 스크롤 핸들러 해제
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {

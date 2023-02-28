@@ -80,7 +80,7 @@ class worksAPI {
     const e = await updateDoc(ref, {
       viewer: increment(1),
     })
-    console.log('e:', e)
+    // console.log('e:', e)
   }
 }
 

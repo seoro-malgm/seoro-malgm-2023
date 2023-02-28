@@ -21,6 +21,13 @@
     "_name": "_44e9cc8a"
   },
   {
+    "name": "linktree",
+    "path": "/linktree",
+    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/linktree.vue",
+    "chunkName": "pages/linktree",
+    "_name": "_1dd44a8d"
+  },
+  {
     "name": "logout",
     "path": "/logout",
     "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/logout.vue",

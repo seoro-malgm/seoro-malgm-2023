@@ -80,9 +80,9 @@
         <h6>내용</h6>
         <client-only>
           <vue-editor
+            v-model="form.desc"
             useCustomImageHandler
             @image-added="onImageAdded"
-            v-model="form.desc"
             @image-removed="onImageRemoved"
             placeholder="이미지, 영상들을 추가하세요"
           />
@@ -200,7 +200,7 @@ export default {
       this.pending.thumbnail = true
       // 이미 올린 썸네일이 있으면 그건 삭제함
       if (this.form.thumbnail) {
-        deleteImage(`thumbnail/${this.form.thumbnail}`)
+        this.$firebase().deleteImage(`thumbnail/${this.form.thumbnail}`)
       }
       const type = file?.type.split('/').at(-1)
       // console.log('type:', type)
@@ -210,7 +210,9 @@ export default {
         try {
           const uploadedFile = await this.$firebase().getImageURL(
             file,
-            'thumbnail/gif/'
+            'gif',
+            'thumbnail/gif/',
+            fileName
           )
           this.form.thumbnail = uploadedFile.name
           this.form.thumbnailURL = uploadedFile.url
@@ -221,7 +223,7 @@ export default {
       } else {
         // gif 이미지가 아닌 경우 파일 업로드
         // 가로 1000으로 리사이징하여 url 적용함
-        this.resize.photo('w', file, 1000, 'object', async (result) => {
+        this.resize.photo('w', file, 1920, 'object', async (result) => {
           const uploadedFile = await this.$firebase().getImageURL(
             result.blob,
             result.blob.type,
@@ -268,7 +270,7 @@ export default {
     },
     // 이미지가 제거되었을 때 file의 url을 불러옴
     onImageRemoved(url) {
-      deleteImage(url)
+      this.$firebase().deleteImage(url)
     },
     // 업로드
     async submit() {

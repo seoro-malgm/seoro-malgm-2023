@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _d22125a6 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _68919e5a = () => interopDefault(import('../pages/blog/index.vue' /* webpackChunkName: "pages/blog/index" */))
 const _44e9cc8a = () => interopDefault(import('../pages/contact.vue' /* webpackChunkName: "pages/contact" */))
+const _1dd44a8d = () => interopDefault(import('../pages/linktree.vue' /* webpackChunkName: "pages/linktree" */))
 const _5efe9882 = () => interopDefault(import('../pages/logout.vue' /* webpackChunkName: "pages/logout" */))
 const _077d1f1c = () => interopDefault(import('../pages/products/index.vue' /* webpackChunkName: "pages/products/index" */))
 const _6eb28331 = () => interopDefault(import('../pages/admin/create.vue' /* webpackChunkName: "pages/admin/create" */))
@@ -41,6 +42,10 @@ export const routerOptions = {
     path: "/contact",
     component: _44e9cc8a,
     name: "contact"
+  }, {
+    path: "/linktree",
+    component: _1dd44a8d,
+    name: "linktree"
   }, {
     path: "/logout",
     component: _5efe9882,
