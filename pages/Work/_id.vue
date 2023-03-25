@@ -201,10 +201,10 @@ export default {
 
 @media (max-width: 1280px) {
   .btn-go-top {
-    top: -4rem;
+    bottom: -4rem;
   }
   .btn-go-top.active {
-    top: 1rem;
+    bottom: 1rem;
   }
 }
 @media (min-width: 1280px) {

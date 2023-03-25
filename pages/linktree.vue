@@ -51,6 +51,10 @@ export default {
           text: '🌌 인스타그램',
           url: this.$store.state.instagram,
         },
+        {
+          text: '갓생클럽 모집',
+          url: 'https://naver.me/F4tS123k',
+        },
       ],
     }
   },
