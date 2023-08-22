@@ -214,9 +214,11 @@ export default {
             'thumbnail/gif/',
             fileName
           )
-          this.form.thumbnail = uploadedFile.name
-          this.form.thumbnailURL = uploadedFile.url
-          this.pending.thumbnail = false
+          if (uploadedFile?.url) {
+            this.form.thumbnail = uploadedFile.name
+            this.form.thumbnailURL = uploadedFile.url
+            this.pending.thumbnail = false
+          }
         } catch (error) {
           window.toast('파일업로드 실패')
         }
@@ -245,7 +247,7 @@ export default {
       // gif 이미지 업로드
       if (type === 'gif') {
         try {
-          const uploadedFile = await this.$firebase().getImageURL(file, 'gif/')
+          const uploadedFile = await this.$firebase().getImageURL(file, 'gif')
           if (uploadedFile?.url) {
             Editor.insertEmbed(cursorLocation, 'image', uploadedFile.url) //업로드한 이미지를 에디터 안(커서로케이션)에 나타나게 한다
             resetUploader()

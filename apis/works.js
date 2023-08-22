@@ -32,6 +32,7 @@ class worksAPI {
             ...doc.data(),
           }
         })
+
         return works
       }
     } catch (error) {
@@ -70,6 +71,7 @@ class worksAPI {
 
   // work 수정
   updateWork = async (id, data) => {
+    console.log(id, data)
     await setDoc(doc(db, 'works', id), data)
     return true
   }

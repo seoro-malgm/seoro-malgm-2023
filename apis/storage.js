@@ -27,7 +27,7 @@ class storageAPI {
     return uploadBytes(storageRef, file).then((snapshot) => {
       // console.log('snapshot.ref:', snapshot.ref)
       return getDownloadURL(snapshot.ref).then((url) => {
-        return { name: snapshot.ref.name, url }
+        return { name: snapshot.ref?.name, url }
       })
     })
   }
@@ -35,8 +35,14 @@ class storageAPI {
   // 이미지 삭제
   deleteImage = (path) => {
     const storage = getStorage()
-    let desertRef = ref(storage, path)
-    deleteObject(desertRef)
+    try {
+      let desertRef = ref(storage, path)
+      if (desertRef) {
+        deleteObject(desertRef)
+      } else return
+    } catch (error) {
+      return
+    }
   }
 }
 

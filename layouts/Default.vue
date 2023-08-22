@@ -137,6 +137,7 @@ export default {
     transform: translateY(16px);
   }
 }
+
 .scroll-down {
   position: fixed;
   left: 50%;

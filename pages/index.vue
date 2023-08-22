@@ -27,13 +27,12 @@
 
 export default {
   layout: 'Default',
-
   async asyncData({ app, $firebase }) {
     const items = await $firebase().getAllWorks()
-    const categories = [...new Set(items.map((r) => r.exp))]
+    // const categories = [...new Set(items.map((r) => r.exp))]
     return {
       items,
-      categories,
+      // categories,
     }
   },
 

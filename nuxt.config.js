@@ -253,4 +253,9 @@ export default {
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env?.MEASUREMENT_ID || '',
   },
+
+  // gtag
+  gtag: {
+    id: 'G-R7FYNEMFH4',
+  },
 }
