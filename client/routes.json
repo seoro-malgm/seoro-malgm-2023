@@ -2,99 +2,99 @@
   {
     "name": "admin",
     "path": "/admin",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/index.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/index.vue",
     "chunkName": "pages/admin/index",
-    "_name": "_d22125a6"
+    "_name": "_11ad4096"
   },
   {
     "name": "blog",
     "path": "/blog",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/blog/index.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/blog/index.vue",
     "chunkName": "pages/blog/index",
-    "_name": "_68919e5a"
+    "_name": "_30e98a5c"
   },
   {
     "name": "contact",
     "path": "/contact",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/contact.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/contact.vue",
     "chunkName": "pages/contact",
-    "_name": "_44e9cc8a"
+    "_name": "_2918df7a"
   },
   {
     "name": "linktree",
     "path": "/linktree",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/linktree.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/linktree.vue",
     "chunkName": "pages/linktree",
-    "_name": "_1dd44a8d"
+    "_name": "_660ab5f6"
   },
   {
     "name": "logout",
     "path": "/logout",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/logout.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/logout.vue",
     "chunkName": "pages/logout",
-    "_name": "_5efe9882"
+    "_name": "_a0296792"
   },
   {
     "name": "products",
     "path": "/products",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/products/index.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/products/index.vue",
     "chunkName": "pages/products/index",
-    "_name": "_077d1f1c"
+    "_name": "_023880d8"
   },
   {
     "name": "admin-create",
     "path": "/admin/create",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/create.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/create.vue",
     "chunkName": "pages/admin/create",
-    "_name": "_6eb28331"
+    "_name": "_15b6e1a9"
   },
   {
     "name": "admin-login",
     "path": "/admin/login",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/login.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/login.vue",
     "chunkName": "pages/admin/login",
-    "_name": "_60971044"
+    "_name": "_7e5dfa68"
   },
   {
     "name": "admin-update",
     "path": "/admin/update",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/update.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/update.vue",
     "chunkName": "pages/admin/update",
-    "_name": "_0b726c7e"
+    "_name": "_9b126a14"
   },
   {
     "name": "admin-write",
     "path": "/admin/write",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/write.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/write.vue",
     "chunkName": "pages/admin/write",
-    "_name": "_733e4dba"
+    "_name": "_590f7f7c"
   },
   {
     "name": "admin-writings",
     "path": "/admin/writings",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/admin/writings.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/admin/writings.vue",
     "chunkName": "pages/admin/writings",
-    "_name": "_82c2e6e8"
+    "_name": "_93f5a5f8"
   },
   {
     "name": "blog-id",
     "path": "/blog/:id",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/blog/_id.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/blog/_id.vue",
     "chunkName": "pages/blog/_id",
-    "_name": "_4cc76f42"
+    "_name": "_08246c8c"
   },
   {
     "name": "work-id",
     "path": "/work/:id?",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/work/_id.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/work/_id.vue",
     "chunkName": "pages/work/_id",
-    "_name": "_4a13b09e"
+    "_name": "_ebc6fbae"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/seoromalgm/Desktop/dev/dev_2023/seoro-malgm/pages/index.vue",
+    "component": "/Users/sangjun/Desktop/dev/dev_2023/seoro-malgm/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_f62f4ba6"
+    "_name": "_4a0cd2b5"
   }
 ]

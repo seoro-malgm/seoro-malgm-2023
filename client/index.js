@@ -13,10 +13,10 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_cf334586 from 'nuxt_plugin_plugin_cf334586' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_bootstrapvue_958bd1fc from 'nuxt_plugin_bootstrapvue_958bd1fc' // Source: ./bootstrap-vue.js (mode: 'all')
-import nuxt_plugin_vue2editor_592f0cdb from 'nuxt_plugin_vue2editor_592f0cdb' // Source: ./vue2-editor.js (mode: 'client')
-import nuxt_plugin_axios_7fb6885a from 'nuxt_plugin_axios_7fb6885a' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_2f9b6c76 from 'nuxt_plugin_plugin_2f9b6c76' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_bootstrapvue_227cf0ec from 'nuxt_plugin_bootstrapvue_227cf0ec' // Source: ./bootstrap-vue.js (mode: 'all')
+import nuxt_plugin_vue2editor_8d2e013a from 'nuxt_plugin_vue2editor_8d2e013a' // Source: ./vue2-editor.js (mode: 'client')
+import nuxt_plugin_axios_f56d974a from 'nuxt_plugin_axios_f56d974a' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_firebase_34d6f55a from 'nuxt_plugin_firebase_34d6f55a' // Source: ../plugins/firebase.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -214,20 +214,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_cf334586 === 'function') {
-    await nuxt_plugin_plugin_cf334586(app.context, inject)
+  if (typeof nuxt_plugin_plugin_2f9b6c76 === 'function') {
+    await nuxt_plugin_plugin_2f9b6c76(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_bootstrapvue_958bd1fc === 'function') {
-    await nuxt_plugin_bootstrapvue_958bd1fc(app.context, inject)
+  if (typeof nuxt_plugin_bootstrapvue_227cf0ec === 'function') {
+    await nuxt_plugin_bootstrapvue_227cf0ec(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_vue2editor_592f0cdb === 'function') {
-    await nuxt_plugin_vue2editor_592f0cdb(app.context, inject)
+  if (process.client && typeof nuxt_plugin_vue2editor_8d2e013a === 'function') {
+    await nuxt_plugin_vue2editor_8d2e013a(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_7fb6885a === 'function') {
-    await nuxt_plugin_axios_7fb6885a(app.context, inject)
+  if (typeof nuxt_plugin_axios_f56d974a === 'function') {
+    await nuxt_plugin_axios_f56d974a(app.context, inject)
   }
 
   if (typeof nuxt_plugin_firebase_34d6f55a === 'function') {

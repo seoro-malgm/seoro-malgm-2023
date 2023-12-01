@@ -27,20 +27,37 @@
 
 export default {
   layout: 'Default',
-  async asyncData({ app, $firebase }) {
-    const items = await $firebase().getAllWorks()
-    // const categories = [...new Set(items.map((r) => r.exp))]
-    return {
-      items,
-      // categories,
-    }
-  },
+  // async asyncData({ app, $firebase }) {
+  //   const items = await $firebase().getAllWorks()
+  //   // const categories = [...new Set(items.map((r) => r.exp))]
+  //   return {
+  //     items,
+  //     // categories,
+  //   }
+  // },
 
   data() {
     return {
+      items: null,
       works: null,
       loading: true,
     }
+  },
+  methods: {
+    async getItems() {
+      try {
+        const data = await this.$firebase().getAllWorks()
+        if (data) {
+          this.items = data
+        }
+      } catch (error) {
+        this.items = []
+        console.error(error)
+      }
+    },
+  },
+  async mounted() {
+    await this.getItems()
   },
 }
 </script>
