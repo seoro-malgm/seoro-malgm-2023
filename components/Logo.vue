@@ -152,7 +152,7 @@ export default {
           scatterd: {
             top: '16px',
             left: '16px',
-            width: '130px',
+            width: '142px',
           },
         },
         rightHand: {
@@ -222,7 +222,7 @@ export default {
     // max-width: 10vw;
   }
   &.text {
-    width: 85px;
+    width: 88px;
     // max-width: 24vw;
   }
   &.right-hand {
